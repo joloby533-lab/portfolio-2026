@@ -45,35 +45,35 @@ function getConfiguredImages() {
 
 const defaultDetailImages = [
   {
-    src: "assets/works-detail-ririn-1.png",
+    src: "assets/optimized/works-detail-ririn-1.webp",
     alt: "Ririn project page 1",
   },
   {
-    src: "assets/works-detail-ririn-2.png",
+    src: "assets/optimized/works-detail-ririn-2.webp",
     alt: "Ririn project page 2",
   },
   {
-    src: "assets/works-detail-ririn-3.png",
+    src: "assets/optimized/works-detail-ririn-3.webp",
     alt: "Ririn project page 3",
   },
   {
-    src: "assets/works-detail-ririn-4.png",
+    src: "assets/optimized/works-detail-ririn-4.webp",
     alt: "Ririn project page 4",
   },
   {
-    src: "assets/works-detail-ririn-5.png",
+    src: "assets/optimized/works-detail-ririn-5.webp",
     alt: "Ririn project page 5",
   },
   {
-    src: "assets/works-detail-ririn-6.png",
+    src: "assets/optimized/works-detail-ririn-6.webp",
     alt: "Ririn project page 6",
   },
   {
-    src: "assets/works-detail-ririn-7.png",
+    src: "assets/optimized/works-detail-ririn-7.webp",
     alt: "Ririn project page 7",
   },
   {
-    src: "assets/works-detail-ririn-8.png",
+    src: "assets/optimized/works-detail-ririn-8.webp",
     alt: "Ririn project page 8",
   },
 ];
@@ -81,6 +81,7 @@ const defaultDetailImages = [
 const configuredImages = getConfiguredImages();
 const detailImages = configuredImages.length > 0 ? configuredImages : defaultDetailImages;
 let currentImageIndex = 0;
+let adjacentPreloaders = [];
 
 function setMenuOpen(isOpen) {
   if (!menuToggle || !menuPanel) return;
@@ -98,6 +99,21 @@ function showProjectImage(nextIndex) {
   detailImage.src = detailImages[currentImageIndex].src;
   detailImage.alt = detailImages[currentImageIndex].alt;
   detailScroller.scrollTop = 0;
+  preloadAdjacentImages();
+}
+
+function preloadAdjacentImages() {
+  if (detailImages.length <= 1) return;
+
+  const previousIndex = (currentImageIndex - 1 + detailImages.length) % detailImages.length;
+  const nextIndex = (currentImageIndex + 1) % detailImages.length;
+
+  adjacentPreloaders = [previousIndex, nextIndex].map((index) => {
+    const image = new Image();
+    image.decoding = "async";
+    image.src = detailImages[index].src;
+    return image;
+  });
 }
 
 if (menuToggle && menuPanel) {
@@ -124,6 +140,8 @@ if (previousButton && nextButton) {
     showProjectImage(currentImageIndex + 1);
   });
 }
+
+preloadAdjacentImages();
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
