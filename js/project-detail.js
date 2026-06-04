@@ -18,6 +18,26 @@ const detailImages = [
     src: "assets/works-detail-ririn-3.png",
     alt: "Ririn project page 3",
   },
+  {
+    src: "assets/works-detail-ririn-4.png",
+    alt: "Ririn project page 4",
+  },
+  {
+    src: "assets/works-detail-ririn-5.png",
+    alt: "Ririn project page 5",
+  },
+  {
+    src: "assets/works-detail-ririn-6.png",
+    alt: "Ririn project page 6",
+  },
+  {
+    src: "assets/works-detail-ririn-7.png",
+    alt: "Ririn project page 7",
+  },
+  {
+    src: "assets/works-detail-ririn-8.png",
+    alt: "Ririn project page 8",
+  },
 ];
 
 let currentImageIndex = 0;
