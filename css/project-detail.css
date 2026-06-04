@@ -122,22 +122,6 @@ button {
   width: 38px;
 }
 
-.site-title {
-  position: fixed;
-  right: 48px;
-  top: 34px;
-  z-index: 110;
-  display: block;
-  width: 292px;
-  pointer-events: auto;
-}
-
-.site-title img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .menu-panel {
   position: fixed;
   left: 34px;
@@ -352,10 +336,10 @@ button {
 }
 
 .works-detail-close {
-  position: absolute;
-  left: calc(100% + var(--detail-side-control-gap) + (var(--detail-side-control-size) - 45px) / 2);
-  top: 0;
-  z-index: 5;
+  position: fixed;
+  right: 46px;
+  top: 36px;
+  z-index: 110;
   display: block;
   width: 45px;
   height: 45px;
@@ -378,11 +362,7 @@ button {
     --detail-side-control-gap: 28px;
   }
 
-  .site-title {
-    width: 240px;
-  }
-
   .works-detail-close {
-    left: calc(100% + var(--detail-side-control-gap) + (var(--detail-side-control-size) - 45px) / 2);
+    right: 36px;
   }
 }
