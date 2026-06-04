@@ -4,10 +4,8 @@ const stage = document.querySelector(".stage");
 const computerFrame = document.querySelector(".computer-frame");
 const rippleLayer = document.querySelector(".screen-ripple-layer");
 const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
-const stageSize = {
-  width: 1728,
-  height: 972,
-};
+const DESIGN_WIDTH = 1728;
+const DESIGN_HEIGHT = 959;
 let computerFrameIndex = 0;
 let rippleTimer;
 
@@ -29,19 +27,22 @@ document.querySelectorAll(".fish-card").forEach((fish, index) => {
   });
 });
 
-function updateStageScale() {
-  const scale = Math.min(window.innerWidth / stageSize.width, window.innerHeight / stageSize.height, 1);
-  const stageLeft = (window.innerWidth - stageSize.width * scale) / 2;
-  const swimLeftEdge = (0 - stageLeft) / scale;
-  const swimRightEdge = (window.innerWidth - stageLeft) / scale;
+function scaleStage() {
+  if (!stage) return;
 
-  stage.style.setProperty("--stage-scale", scale.toFixed(4));
-  stage.style.setProperty("--swim-left-edge", `${swimLeftEdge.toFixed(2)}px`);
-  stage.style.setProperty("--swim-right-edge", `${swimRightEdge.toFixed(2)}px`);
+  const scale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
+  const left = (window.innerWidth - DESIGN_WIDTH * scale) / 2;
+  const top = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+
+  stage.style.transform = `scale(${scale})`;
+  stage.style.left = `${left}px`;
+  stage.style.top = `${top}px`;
+  stage.style.setProperty("--swim-left-edge", "0px");
+  stage.style.setProperty("--swim-right-edge", `${DESIGN_WIDTH}px`);
 }
 
-updateStageScale();
-window.addEventListener("resize", updateStageScale);
+scaleStage();
+window.addEventListener("resize", scaleStage);
 
 function setMenuOpen(isOpen) {
   menuToggle.classList.toggle("is-open", isOpen);

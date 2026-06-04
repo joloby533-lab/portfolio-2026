@@ -1,10 +1,33 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const menuPanel = document.querySelector(".menu-panel");
+const edgeUi = document.querySelector(".fixed-edge-ui");
+const designStage = document.querySelector(".works-detail-stage");
 const detailImage = document.querySelector(".works-detail-image");
 const detailScroller = document.querySelector(".works-detail-scroll-area");
 const previousButton = document.querySelector(".works-detail-nav-left");
 const nextButton = document.querySelector(".works-detail-nav-right");
 const detailStage = document.querySelector(".works-detail-stage");
+const DESIGN_WIDTH = 1728;
+const DESIGN_HEIGHT = 959;
+
+if (edgeUi && designStage && edgeUi.parentElement !== designStage) {
+  designStage.prepend(edgeUi);
+}
+
+function scaleDesignStage() {
+  if (!designStage) return;
+
+  const scale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
+  const left = (window.innerWidth - DESIGN_WIDTH * scale) / 2;
+  const top = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+
+  designStage.style.transform = `scale(${scale})`;
+  designStage.style.left = `${left}px`;
+  designStage.style.top = `${top}px`;
+}
+
+scaleDesignStage();
+window.addEventListener("resize", scaleDesignStage);
 
 function getConfiguredImages() {
   if (!detailStage?.dataset.images) return [];

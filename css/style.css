@@ -56,14 +56,14 @@ button {
 
 /* Layer 1: fixed viewport edge UI. */
 .fixed-edge-ui {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 100;
   pointer-events: none;
 }
 
 .edge-icon {
-  position: fixed;
+  position: absolute;
   z-index: 110;
   display: grid;
   place-items: center;
@@ -120,7 +120,7 @@ button {
 }
 
 .site-title {
-  position: fixed;
+  position: absolute;
   right: 48px;
   top: 28px;
   z-index: 110;
@@ -139,7 +139,7 @@ button {
 }
 
 .menu-panel {
-  position: fixed;
+  position: absolute;
   left: 34px;
   top: 102px;
   z-index: 120;
@@ -200,7 +200,7 @@ button {
 }
 
 .about-button {
-  position: fixed;
+  position: absolute;
   left: 42px;
   bottom: 38px;
   z-index: 110;
@@ -221,7 +221,7 @@ button {
 }
 
 .site-footer {
-  position: fixed;
+  position: absolute;
   right: 46px;
   bottom: 32px;
   z-index: 110;
@@ -254,32 +254,27 @@ button {
   position: fixed;
   inset: 0;
   z-index: 1;
-  display: flex;
   overflow: hidden;
-  align-items: center;
-  justify-content: center;
 }
 
 .stage {
-  position: relative;
+  position: absolute;
   width: 1728px;
-  height: 972px;
-  margin: 0 auto;
+  height: 959px;
+  left: 0;
+  top: 0;
   overflow: visible;
   background: #ffffff;
-  transform: scale(var(--stage-scale));
-  transform-origin: center center;
-  flex: 0 0 auto;
+  transform-origin: top left;
 }
 
 .computer {
   position: absolute;
-  left: 50%;
+  left: 362px;
   top: 70px;
   z-index: 10;
   width: 1004px;
   height: 832px;
-  transform: translateX(-50%);
 }
 
 .computer-frame {
