@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.about-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.about-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.about-close {
+  position: fixed;
+  top: 32px;
+  right: 60px;
+  z-index: 10;
+  display: block;
+  width: 45px;
+  height: 45px;
+  background-image: url("../assets/about-close-default.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.about-close:hover,
+.about-close:focus-visible {
+  background-image: url("../assets/about-close-hover.png");
+  outline: none;
+}
