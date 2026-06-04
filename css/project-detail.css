@@ -17,7 +17,7 @@
 :root {
   --ink: #1e1e1e;
   --footer-gray: #989898;
-  --detail-frame-width: clamp(760px, min(calc(100vw - 340px), 1560px, calc(166.844vh - 253.67px)), 1560px);
+  --detail-frame-width: clamp(800px, min(calc(100vw - 280px), 1560px, calc(166.844vh - 213.67px)), 1560px);
   --detail-side-control-size: 46px;
   --detail-side-control-gap: 54px;
 }
