@@ -4,8 +4,23 @@ const detailImage = document.querySelector(".works-detail-image");
 const detailScroller = document.querySelector(".works-detail-scroll-area");
 const previousButton = document.querySelector(".works-detail-nav-left");
 const nextButton = document.querySelector(".works-detail-nav-right");
+const detailStage = document.querySelector(".works-detail-stage");
 
-const detailImages = [
+function getConfiguredImages() {
+  if (!detailStage?.dataset.images) return [];
+
+  const projectTitle = detailStage.dataset.projectTitle || "Project";
+  return detailStage.dataset.images
+    .split(",")
+    .map((src) => src.trim())
+    .filter(Boolean)
+    .map((src, index) => ({
+      src,
+      alt: `${projectTitle} page ${index + 1}`,
+    }));
+}
+
+const defaultDetailImages = [
   {
     src: "assets/works-detail-ririn-1.png",
     alt: "Ririn project page 1",
@@ -40,6 +55,8 @@ const detailImages = [
   },
 ];
 
+const configuredImages = getConfiguredImages();
+const detailImages = configuredImages.length > 0 ? configuredImages : defaultDetailImages;
 let currentImageIndex = 0;
 
 function setMenuOpen(isOpen) {
