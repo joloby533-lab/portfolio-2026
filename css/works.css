@@ -225,7 +225,7 @@ button {
 }
 
 .works-about-button {
-  position: absolute;
+  position: fixed;
   left: 42px;
   bottom: 38px;
   z-index: 110;
@@ -243,10 +243,12 @@ button {
   line-height: 28px;
   text-decoration: none;
   pointer-events: auto;
+  transform: scale(var(--works-stage-scale, 1));
+  transform-origin: left bottom;
 }
 
 .works-home-fixed {
-  position: absolute;
+  position: fixed;
   right: 46px;
   bottom: 76px;
   z-index: 110;
@@ -267,7 +269,7 @@ button {
 }
 
 .works-site-footer {
-  position: absolute;
+  position: fixed;
   right: 46px;
   bottom: 32px;
   z-index: 110;

@@ -12,6 +12,7 @@ function scaleWorksStage() {
   worksStage.style.left = "0px";
   worksStage.style.top = "0px";
   worksPage.style.height = `${WORKS_DESIGN_HEIGHT * scale}px`;
+  document.documentElement.style.setProperty("--works-stage-scale", scale);
 }
 
 scaleWorksStage();
