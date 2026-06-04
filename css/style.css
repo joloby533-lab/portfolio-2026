@@ -279,6 +279,59 @@ button {
   pointer-events: none;
 }
 
+.screen-ripple-layer {
+  position: absolute;
+  left: 34.89%;
+  top: 17.69%;
+  z-index: 3;
+  width: 30.52%;
+  height: 27.98%;
+  overflow: hidden;
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.screen-ripple {
+  position: absolute;
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+  width: 10px;
+  height: 10px;
+  border: 1.4px solid rgba(255, 255, 255, 0.68);
+  border-radius: 999px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.15);
+  animation: screen-ripple-expand 3.1s ease-out forwards;
+}
+
+.screen-ripple:nth-child(3n + 1) {
+  animation-delay: 0.16s;
+}
+
+.screen-ripple:nth-child(3n + 2) {
+  animation-delay: 0.32s;
+}
+
+@keyframes screen-ripple-expand {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.15);
+  }
+  14% {
+    opacity: 0.62;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(8.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-ripple {
+    animation: none;
+  }
+}
+
 .fish-card {
   position: absolute;
   left: var(--fish-left);

@@ -2,12 +2,14 @@ const menuToggle = document.querySelector(".menu-toggle");
 const menuPanel = document.querySelector(".menu-panel");
 const stage = document.querySelector(".stage");
 const computerFrame = document.querySelector(".computer-frame");
-const computerFrames = ["assets/computer-frame.png", "assets/computer-frame-2.png"];
+const rippleLayer = document.querySelector(".screen-ripple-layer");
+const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
 const stageSize = {
   width: 1728,
   height: 972,
 };
 let computerFrameIndex = 0;
+let rippleTimer;
 
 document.querySelectorAll(".fish-card").forEach((fish, index) => {
   const clone = fish.cloneNode(true);
@@ -71,3 +73,42 @@ setInterval(() => {
   computerFrameIndex = (computerFrameIndex + 1) % computerFrames.length;
   computerFrame.src = computerFrames[computerFrameIndex];
 }, 3800);
+
+function createScreenRipple() {
+  if (!rippleLayer || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const x = 12 + Math.random() * 76;
+  const y = 14 + Math.random() * 72;
+  const ringCount = 2;
+
+  for (let index = 0; index < ringCount; index += 1) {
+    const ring = document.createElement("span");
+    ring.className = "screen-ripple";
+    ring.style.setProperty("--ripple-x", `${x}%`);
+    ring.style.setProperty("--ripple-y", `${y}%`);
+    ring.style.animationDelay = `${index * 0.24}s`;
+    rippleLayer.append(ring);
+
+    ring.addEventListener("animationend", () => {
+      ring.remove();
+    });
+  }
+}
+
+function scheduleScreenRipple() {
+  const nextDelay = 700 + Math.random() * 1300;
+
+  rippleTimer = window.setTimeout(() => {
+    createScreenRipple();
+    scheduleScreenRipple();
+  }, nextDelay);
+}
+
+createScreenRipple();
+window.setTimeout(createScreenRipple, 420);
+window.setTimeout(createScreenRipple, 980);
+scheduleScreenRipple();
+
+window.addEventListener("pagehide", () => {
+  window.clearTimeout(rippleTimer);
+});
