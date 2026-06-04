@@ -77,7 +77,7 @@ button {
 
 .works-menu-toggle {
   left: 44px;
-  top: 47px;
+  top: 41px;
   width: 37px;
   height: 24px;
 }
@@ -90,7 +90,7 @@ button {
 
 .works-menu-toggle:hover {
   left: 34px;
-  top: 36px;
+  top: 30px;
   width: 54px;
   height: 54px;
   background: #1e1e1e;
@@ -104,7 +104,7 @@ button {
 
 .works-home-small {
   left: 103px;
-  top: 39px;
+  top: 33px;
   width: 40px;
   height: 40px;
 }
@@ -123,7 +123,7 @@ button {
 .works-home-small:hover,
 .works-home-small:focus-visible {
   left: 96px;
-  top: 36px;
+  top: 30px;
   width: 54px;
   height: 54px;
   background-color: #1e1e1e;
@@ -140,7 +140,7 @@ button {
 .works-menu-panel {
   position: absolute;
   left: 34px;
-  top: 108px;
+  top: 102px;
   z-index: 120;
   display: flex;
   width: 90px;
@@ -180,7 +180,7 @@ button {
 .works-site-title {
   position: absolute;
   right: 48px;
-  top: 34px;
+  top: 28px;
   z-index: 110;
   display: block;
   width: 292px;
@@ -196,7 +196,7 @@ button {
 .works-about-button {
   position: fixed;
   left: 42px;
-  bottom: 44px;
+  bottom: 38px;
   z-index: 110;
   display: inline-flex;
   padding: 6px 17px 6px 15px;
@@ -217,7 +217,7 @@ button {
 .works-home-fixed {
   position: fixed;
   right: 46px;
-  bottom: 82px;
+  bottom: 76px;
   z-index: 110;
   display: block;
   width: 156px;
@@ -238,7 +238,7 @@ button {
 .works-site-footer {
   position: fixed;
   right: 46px;
-  bottom: 38px;
+  bottom: 32px;
   z-index: 110;
   color: #989898;
   font-family: "SourceCodePro", "Courier New", monospace;
