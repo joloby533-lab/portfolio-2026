@@ -52,7 +52,7 @@ button {
   width: var(--home-page-width, 100vw);
   min-width: var(--home-page-width, 100vw);
   height: 100vh;
-  overflow: visible;
+  overflow: hidden;
   background: #ffffff;
 }
 
@@ -275,7 +275,7 @@ button {
   z-index: 1;
   width: var(--home-page-width, 100vw);
   height: 100vh;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .stage {
