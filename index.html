@@ -4,7 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hao Yixuan / Portfolio 2026</title>
-    <link rel="stylesheet" href="css/style.css?v=home-30" />
+    <link rel="preload" as="image" href="assets/computer-frame-nowater.svg" />
+    <link rel="preload" as="image" href="assets/computer-frame-nowater2.svg" />
+    <script>
+      (() => {
+        const DESIGN_WIDTH = 1728;
+        const DESIGN_HEIGHT = 959;
+        const MIN_STAGE_SCALE = 0.66;
+        const FISH_SWIM_STATE_KEY = "hao-portfolio-fish-swim-state";
+        const fitScale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
+        const scale = Math.max(MIN_STAGE_SCALE, fitScale);
+        const stageWidth = DESIGN_WIDTH * scale;
+        const pageWidth = Math.max(window.innerWidth, stageWidth);
+        const left = (pageWidth - stageWidth) / 2;
+        const top = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+
+        document.documentElement.style.setProperty("--home-page-width", `${pageWidth}px`);
+        document.documentElement.style.setProperty("--home-stage-scale", String(scale));
+        document.documentElement.style.setProperty("--home-stage-left", `${left}px`);
+        document.documentElement.style.setProperty("--home-stage-top", `${top}px`);
+
+        try {
+          const fishState = JSON.parse(sessionStorage.getItem(FISH_SWIM_STATE_KEY) || "{}");
+          Object.entries(fishState).forEach(([fishId, progress]) => {
+            const seconds = Number(progress);
+            const number = fishId.replace("fish-", "").padStart(2, "0");
+
+            if (Number.isFinite(seconds)) {
+              document.documentElement.style.setProperty(`--fish-${number}-swim-delay`, `${-seconds}s`);
+            }
+          });
+        } catch {}
+      })();
+    </script>
+    <link rel="stylesheet" href="css/style.css?v=home-35" />
   </head>
   <body>
     <main class="home-page" aria-label="Hao Yixuan portfolio home">
@@ -35,38 +68,38 @@
       <section class="stage-layer" aria-label="Featured works">
         <div class="stage design-stage">
           <a class="fish-card fish-01" href="project-01.html" aria-label="Open project 01">
-            <img src="assets/fish-01-kurashi.png?v=20260604" alt="Project 01" />
+            <img src="assets/fish-01-kurashi.png?v=20260604" alt="Project 01" width="2050" height="1001" />
           </a>
           <a class="fish-card fish-02" href="project-02.html" aria-label="Open project 02">
-            <img src="assets/fish-02-ririn.png?v=20260604" alt="Project 02" />
+            <img src="assets/fish-02-ririn.png?v=20260604" alt="Project 02" width="1775" height="867" />
           </a>
           <a class="fish-card fish-03" href="project-03.html" aria-label="Open project 03">
-            <img src="assets/fish-03-apple-lab.png?v=20260604" alt="Project 03" />
+            <img src="assets/fish-03-apple-lab.png?v=20260604" alt="Project 03" width="1696" height="826" />
           </a>
           <a class="fish-card fish-04" href="project-04.html" aria-label="Open project 04">
-            <img src="assets/fish-04-petsnowy.png?v=20260604" alt="Project 04" />
+            <img src="assets/fish-04-petsnowy.png?v=20260604" alt="Project 04" width="1908" height="932" />
           </a>
           <a class="fish-card fish-05" href="project-05.html" aria-label="Open project 05">
-            <img src="assets/fish-05-chronograph.png?v=20260604" alt="Project 05" />
+            <img src="assets/fish-05-chronograph.png?v=20260604" alt="Project 05" width="1777" height="867" />
           </a>
           <a class="fish-card fish-06" href="project-06.html" aria-label="Open project 06">
-            <img src="assets/fish-06-semiotic-symbols.png?v=20260604" alt="Project 06" />
+            <img src="assets/fish-06-semiotic-symbols.png?v=20260604" alt="Project 06" width="1142" height="558" />
           </a>
           <a class="fish-card fish-07" href="project-07.html" aria-label="Open project 07">
-            <img src="assets/fish-07-six-by-six.png?v=20260604" alt="Project 07" />
+            <img src="assets/fish-07-six-by-six.png?v=20260604" alt="Project 07" width="1529" height="714" />
           </a>
           <a class="fish-card fish-08" href="project-08.html" aria-label="Open project 08">
-            <img src="assets/fish-08-tokyo-night.png?v=20260604" alt="Project 08" />
+            <img src="assets/fish-08-tokyo-night.png?v=20260604" alt="Project 08" width="1080" height="528" />
           </a>
           <a class="fish-card fish-09" href="project-09.html" aria-label="Open project 09">
-            <img src="assets/fish-09-toptometrist.png?v=20260604" alt="Project 09" />
+            <img src="assets/fish-09-toptometrist.png?v=20260604" alt="Project 09" width="1081" height="528" />
           </a>
           <a class="fish-card fish-10" href="otherworks.html" aria-label="Open other works">
-            <img src="assets/fish-10-otherworks.png" alt="Other Works" />
+            <img src="assets/fish-10-otherworks.png" alt="Other Works" width="1775" height="867" />
           </a>
 
           <div class="computer" aria-label="Retro computer screen">
-            <img class="computer-frame" src="assets/computer-frame-nowater.svg" alt="" />
+            <img class="computer-frame" src="assets/computer-frame-nowater.svg" alt="" width="1350" height="1119" />
             <div class="screen-ripple-layer" aria-hidden="true"></div>
             <div class="screen-crt-layer" aria-hidden="true"></div>
           </div>
@@ -74,6 +107,6 @@
       </section>
     </main>
 
-    <script src="js/main.js?v=home-30"></script>
+    <script src="js/main.js?v=home-35"></script>
   </body>
 </html>

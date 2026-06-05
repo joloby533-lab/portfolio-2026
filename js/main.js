@@ -11,15 +11,89 @@ const projectComputerFrames = Array.from({ length: 10 }, (_, index) => {
 const DESIGN_WIDTH = 1728;
 const DESIGN_HEIGHT = 959;
 const MIN_STAGE_SCALE = 0.66;
+const FISH_SWIM_STATE_KEY = "hao-portfolio-fish-swim-state";
+const pageAnimationStartedAt = performance.now();
 let computerFrameIndex = 0;
 let isComputerPreviewActive = false;
 let rippleTimer;
 const copyToastTimers = new WeakMap();
 
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 projectComputerFrames.forEach(([, frameSrc]) => {
   const previewImage = new Image();
   previewImage.src = frameSrc;
 });
+
+computerFrames.forEach((frameSrc) => {
+  const frameImage = new Image();
+  frameImage.src = frameSrc;
+});
+
+function parseCssTimeToMs(value) {
+  const text = String(value || "").trim();
+  const numeric = Number.parseFloat(text);
+
+  if (!Number.isFinite(numeric)) return 0;
+  return text.endsWith("ms") ? numeric : numeric * 1000;
+}
+
+function readFishSwimState() {
+  try {
+    const state = JSON.parse(sessionStorage.getItem(FISH_SWIM_STATE_KEY) || "{}");
+    return state && typeof state === "object" ? state : {};
+  } catch {
+    return {};
+  }
+}
+
+function getFishSwimProgress(fish) {
+  const animation = fish.getAnimations?.({ subtree: false })?.find((item) => item.effect?.getTiming);
+
+  if (animation) {
+    const timing = animation.effect.getTiming();
+    const duration = typeof timing.duration === "number" ? timing.duration : parseCssTimeToMs(getComputedStyle(fish).animationDuration);
+    const currentTime = Number(animation.currentTime);
+
+    if (duration > 0 && Number.isFinite(currentTime)) {
+      return (((currentTime % duration) + duration) % duration) / 1000;
+    }
+  }
+
+  const style = getComputedStyle(fish);
+  const duration = parseCssTimeToMs(style.getPropertyValue("--swim-duration") || style.animationDuration);
+  const delay = parseCssTimeToMs(style.getPropertyValue("--swim-delay") || style.animationDelay);
+  const elapsed = performance.now() - pageAnimationStartedAt;
+
+  if (duration <= 0) return 0;
+  return (((elapsed - delay) % duration) + duration) % duration / 1000;
+}
+
+function restoreFishSwimProgress(fish, fishId, savedState) {
+  const progress = Number(savedState[fishId]);
+
+  if (!Number.isFinite(progress) || progress < 0) return;
+  fish.style.setProperty("--swim-delay", `${-progress}s`);
+}
+
+function saveFishSwimProgress() {
+  const state = {};
+
+  document.querySelectorAll(".fish-card:not(.fish-clone)").forEach((fish) => {
+    const fishId = fish.dataset.loopFish;
+    if (!fishId) return;
+
+    state[fishId] = getFishSwimProgress(fish);
+  });
+
+  try {
+    sessionStorage.setItem(FISH_SWIM_STATE_KEY, JSON.stringify(state));
+  } catch {
+    // If storage is unavailable, the CSS defaults still provide stable first-load positions.
+  }
+}
 
 function copyTextFallback(text) {
   const textarea = document.createElement("textarea");
@@ -77,12 +151,16 @@ function showCopyToast(link) {
   copyToastTimers.set(footer, timer);
 }
 
+const savedFishSwimState = readFishSwimState();
+
 document.querySelectorAll(".fish-card").forEach((fish, index) => {
-  const clone = fish.cloneNode(true);
   const fishId = `fish-${index + 1}`;
   const isPulseFish = fish.classList.contains("fish-10");
 
   fish.dataset.loopFish = fishId;
+  restoreFishSwimProgress(fish, fishId, savedFishSwimState);
+
+  const clone = fish.cloneNode(true);
   clone.dataset.loopFish = fishId;
   clone.classList.add("fish-clone");
   clone.setAttribute("aria-hidden", "true");
@@ -168,6 +246,7 @@ function scaleStage() {
   const pageWidth = Math.max(window.innerWidth, stageWidth);
   const left = (pageWidth - stageWidth) / 2;
   const top = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+  const scrollLeft = pageWidth > window.innerWidth ? (pageWidth - window.innerWidth) / 2 : 0;
 
   document.documentElement.style.setProperty("--home-page-width", `${pageWidth}px`);
   stage.style.transform = `scale(${scale})`;
@@ -176,19 +255,19 @@ function scaleStage() {
   stage.style.setProperty("--swim-left-edge", "0px");
   stage.style.setProperty("--swim-right-edge", `${DESIGN_WIDTH}px`);
 
-  if (pageWidth > window.innerWidth) {
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        left: (pageWidth - window.innerWidth) / 2,
-        top: 0,
-        behavior: "auto",
-      });
-    });
-  }
+  window.scrollTo({
+    left: scrollLeft,
+    top: 0,
+    behavior: "auto",
+  });
 }
 
 scaleStage();
 window.addEventListener("resize", scaleStage);
+window.addEventListener("pageshow", () => {
+  scaleStage();
+  restoreComputerFrame();
+});
 
 function setMenuOpen(isOpen) {
   menuToggle.classList.toggle("is-open", isOpen);
@@ -261,5 +340,12 @@ window.setTimeout(createScreenRipple, 980);
 scheduleScreenRipple();
 
 window.addEventListener("pagehide", () => {
+  saveFishSwimProgress();
   window.clearTimeout(rippleTimer);
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    saveFishSwimProgress();
+  }
 });

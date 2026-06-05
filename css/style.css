@@ -289,10 +289,11 @@ button {
   position: absolute;
   width: 1728px;
   height: 959px;
-  left: 0;
-  top: 0;
+  left: var(--home-stage-left, 0);
+  top: var(--home-stage-top, 0);
   overflow: visible;
   background: #ffffff;
+  transform: scale(var(--home-stage-scale, 1));
   transform-origin: top left;
 }
 
@@ -303,6 +304,10 @@ button {
   z-index: 10;
   width: 1004px;
   height: 832px;
+  background-image: url("../assets/computer-frame-nowater.svg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 1004px auto;
 }
 
 .computer-frame {
@@ -445,6 +450,7 @@ button {
   z-index: var(--fish-z);
   display: block;
   width: var(--fish-width);
+  height: var(--fish-height);
   --loop-span: calc(var(--swim-right-edge) - var(--swim-left-edge));
   --loop-offset: 0px;
   animation: var(--swim-name) var(--swim-duration) linear var(--swim-delay) infinite;
@@ -539,112 +545,122 @@ button {
 
 .fish-01 {
   --fish-width: 430px;
+  --fish-height: 210px;
   --fish-left: 210px;
   --fish-top: 110px;
   --fish-z: 16;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
   --swim-duration: 64s;
-  --swim-delay: -14s;
+  --swim-delay: var(--fish-01-swim-delay, -14s);
 }
 
 .fish-02 {
   --fish-width: 330px;
+  --fish-height: 161px;
   --fish-left: 1145px;
   --fish-top: 105px;
   --fish-z: 24;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
   --swim-duration: 50s;
-  --swim-delay: -37s;
+  --swim-delay: var(--fish-02-swim-delay, -37s);
 }
 
 .fish-03 {
   --fish-width: 360px;
+  --fish-height: 175px;
   --fish-left: 385px;
   --fish-top: 465px;
   --fish-z: 25;
   --swim-name: swim-ltr;
   --clone-offset: calc(-1 * var(--loop-span));
   --swim-duration: 62s;
-  --swim-delay: -22s;
+  --swim-delay: var(--fish-03-swim-delay, -22s);
 }
 
 .fish-04 {
   --fish-width: 420px;
+  --fish-height: 205px;
   --fish-left: 980px;
   --fish-top: 565px;
   --fish-z: 17;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
   --swim-duration: 70s;
-  --swim-delay: -51s;
+  --swim-delay: var(--fish-04-swim-delay, -51s);
 }
 
 .fish-05 {
   --fish-width: 360px;
+  --fish-height: 176px;
   --fish-left: 900px;
   --fish-top: 345px;
   --fish-z: 30;
   --swim-name: swim-ltr;
   --clone-offset: calc(-1 * var(--loop-span));
   --swim-duration: 52s;
-  --swim-delay: -33s;
+  --swim-delay: var(--fish-05-swim-delay, -33s);
 }
 
 .fish-06 {
   --fish-width: 250px;
+  --fish-height: 122px;
   --fish-left: 1365px;
   --fish-top: 365px;
   --fish-z: 34;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
   --swim-duration: 38s;
-  --swim-delay: -12s;
+  --swim-delay: var(--fish-06-swim-delay, -12s);
 }
 
 .fish-07 {
   --fish-width: 300px;
+  --fish-height: 140px;
   --fish-left: 140px;
   --fish-top: 675px;
   --fish-z: 28;
   --swim-name: swim-ltr;
   --clone-offset: calc(-1 * var(--loop-span));
   --swim-duration: 46s;
-  --swim-delay: -31s;
+  --swim-delay: var(--fish-07-swim-delay, -31s);
 }
 
 .fish-08 {
   --fish-width: 230px;
+  --fish-height: 112px;
   --fish-left: 145px;
   --fish-top: 400px;
   --fish-z: 36;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
   --swim-duration: 34s;
-  --swim-delay: -19s;
+  --swim-delay: var(--fish-08-swim-delay, -19s);
 }
 
 .fish-09 {
   --fish-width: 240px;
+  --fish-height: 117px;
   --fish-left: 1365px;
   --fish-top: 720px;
   --fish-z: 35;
   --swim-name: swim-ltr;
   --clone-offset: calc(-1 * var(--loop-span));
   --swim-duration: 36s;
-  --swim-delay: -24s;
+  --swim-delay: var(--fish-09-swim-delay, -24s);
 }
 
 .fish-10 {
   --fish-width: 285px;
+  --fish-height: 139px;
   --fish-left: 1510px;
   --fish-top: 245px;
   --fish-z: 22;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
   --swim-duration: 48s;
-  --swim-delay: -8s;
+  --swim-delay: var(--fish-10-swim-delay, -8s);
 }
 
 @keyframes fish-struggle {
