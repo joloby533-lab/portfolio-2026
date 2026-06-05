@@ -1,6 +1,6 @@
 const worksStage = document.querySelector(".works-design-stage");
 const worksPage = document.querySelector(".works-page");
-const WORKS_DESIGN_HEIGHT = 1753;
+const WORKS_DESIGN_HEIGHT = 2027;
 const copyToastTimers = new WeakMap();
 
 function copyTextFallback(text) {

@@ -42,7 +42,7 @@ button {
   left: 0;
   top: 0;
   width: 1728px;
-  height: 1753px;
+  height: 2027px;
   background: #ffffff;
 }
 
@@ -324,90 +324,136 @@ body.is-works-scrolled .works-site-title {
   transform: translateY(0);
 }
 
-.works-project-hotspot {
+.work-card {
   position: absolute;
+  left: var(--card-left);
+  top: var(--card-top);
   z-index: 10;
   display: block;
-  border: 3px solid transparent;
+  width: var(--card-width);
+  height: var(--card-height);
+  overflow: hidden;
   border-radius: 6px;
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  cursor: pointer;
   transform-origin: center;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition: outline-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.works-project-hotspot:hover,
-.works-project-hotspot:focus-visible {
-  border-color: #1e1e1e;
+.work-card:hover,
+.work-card:focus-visible {
+  outline-color: #1e1e1e;
   box-shadow: 0 5px 12px rgba(30, 30, 30, 0.16);
-  outline: none;
   transform: scale(1.015);
 }
 
-.hotspot-mobile-01 {
-  left: 1.7%;
-  top: 19.3%;
-  width: 12.1%;
-  height: 7%;
+.work-thumb {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-image: url("../assets/portfolio-overview-page.png?v=overview-03");
+  background-position: var(--thumb-x) var(--thumb-y);
+  background-repeat: no-repeat;
+  background-size: 1728px auto;
+  pointer-events: none;
 }
 
-.hotspot-mobile-02 {
-  left: 17.15%;
-  top: 19.3%;
-  width: 12.25%;
-  height: 7%;
+.work-card-mobile-01 {
+  --card-left: 25px;
+  --card-top: 331px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -25px;
+  --thumb-y: -331px;
 }
 
-.hotspot-mobile-03 {
-  left: 32.65%;
-  top: 19.3%;
-  width: 12.35%;
-  height: 7%;
+.work-card-mobile-02 {
+  --card-left: 295px;
+  --card-top: 331px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -295px;
+  --thumb-y: -331px;
 }
 
-.hotspot-mobile-04 {
-  left: 48.2%;
-  top: 19.3%;
-  width: 12.35%;
-  height: 7%;
+.work-card-mobile-03 {
+  --card-left: 565px;
+  --card-top: 331px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -565px;
+  --thumb-y: -331px;
 }
 
-.hotspot-web-01 {
-  left: 1.7%;
-  top: 41.5%;
-  width: 12.15%;
-  height: 6.6%;
+.work-card-mobile-04 {
+  --card-left: 835px;
+  --card-top: 331px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -835px;
+  --thumb-y: -331px;
 }
 
-.hotspot-book-01 {
-  left: 1.35%;
-  top: 63.35%;
-  width: 12.65%;
-  height: 7.25%;
+.work-card-web-01 {
+  --card-left: 25px;
+  --card-top: 720px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -25px;
+  --thumb-y: -720px;
 }
 
-.hotspot-book-02 {
-  left: 17.1%;
-  top: 63.35%;
-  width: 12.35%;
-  height: 7.1%;
+.work-card-book-01 {
+  --card-left: 25px;
+  --card-top: 1099px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -25px;
+  --thumb-y: -1099px;
 }
 
-.hotspot-book-03 {
-  left: 32.65%;
-  top: 63.35%;
-  width: 12.35%;
-  height: 7.1%;
+.work-card-book-02 {
+  --card-left: 295px;
+  --card-top: 1099px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -295px;
+  --thumb-y: -1099px;
 }
 
-.hotspot-book-04 {
-  left: 48.2%;
-  top: 63.35%;
-  width: 12.35%;
-  height: 7.1%;
+.work-card-book-03 {
+  --card-left: 565px;
+  --card-top: 1099px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -565px;
+  --thumb-y: -1099px;
 }
 
-.hotspot-installation-00 {
-  left: 1.45%;
-  top: 85.65%;
-  width: 12.45%;
-  height: 7.15%;
+.work-card-book-04 {
+  --card-left: 835px;
+  --card-top: 1099px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -835px;
+  --thumb-y: -1099px;
+}
+
+.work-card-installation-00 {
+  --card-left: 25px;
+  --card-top: 1480px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -25px;
+  --thumb-y: -1480px;
+}
+
+.work-card-otherworks-00 {
+  --card-left: 25px;
+  --card-top: 1862px;
+  --card-width: 214px;
+  --card-height: 120px;
+  --thumb-x: -25px;
+  --thumb-y: -1862px;
 }
