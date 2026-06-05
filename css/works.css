@@ -316,8 +316,11 @@ body.is-works-scrolled .works-site-title {
   display: block;
   width: var(--card-width);
   height: var(--card-height);
+  padding: 0;
   overflow: hidden;
+  border: 0;
   border-radius: 6px;
+  background: transparent;
   cursor: pointer;
   transform-origin: center;
   transition: transform 0.2s ease;
@@ -344,6 +347,53 @@ body.is-works-scrolled .works-site-title {
 
 .work-card:hover .work-thumb,
 .work-card:focus-visible .work-thumb {
+  opacity: 1;
+}
+
+.work-card.is-coming-soon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(70, 70, 70, 0.64);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.work-card.is-coming-soon:hover::after,
+.work-card.is-coming-soon:focus-visible::after,
+.work-card.is-coming-soon.is-tapped::after {
+  opacity: 1;
+}
+
+.work-progress-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  padding: 5px 9px 6px;
+  align-items: center;
+  justify-content: center;
+  background: #1e1e1e;
+  color: #ffffff;
+  font-family: "SourceCodePro", "Courier New", monospace;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.18s ease;
+  white-space: nowrap;
+}
+
+.work-card.is-coming-soon:hover .work-progress-label,
+.work-card.is-coming-soon:focus-visible .work-progress-label,
+.work-card.is-coming-soon.is-tapped .work-progress-label {
   opacity: 1;
 }
 

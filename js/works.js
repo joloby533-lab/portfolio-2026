@@ -2,6 +2,7 @@ const worksStage = document.querySelector(".works-design-stage");
 const worksPage = document.querySelector(".works-page");
 const WORKS_DESIGN_HEIGHT = 2027;
 const copyToastTimers = new WeakMap();
+const comingSoonTimers = new WeakMap();
 
 function copyTextFallback(text) {
   const textarea = document.createElement("textarea");
@@ -32,6 +33,20 @@ function setupCopyEmailLinks() {
       }
 
       showCopyToast(link);
+    });
+  });
+}
+
+function setupComingSoonCards() {
+  document.querySelectorAll(".work-card.is-coming-soon").forEach((card) => {
+    card.addEventListener("click", () => {
+      window.clearTimeout(comingSoonTimers.get(card));
+      card.classList.add("is-tapped");
+
+      const timer = window.setTimeout(() => {
+        card.classList.remove("is-tapped");
+      }, 1200);
+      comingSoonTimers.set(card, timer);
     });
   });
 }
@@ -71,6 +86,7 @@ function updateWorksScrolledState() {
   document.body.classList.toggle("is-works-scrolled", window.scrollY > 24);
 }
 
+setupComingSoonCards();
 setupCopyEmailLinks();
 setWorksPageHeight();
 updateWorksScrolledState();
