@@ -88,10 +88,7 @@ button {
 }
 
 .works-menu-toggle {
-  left: 36px;
-  top: 41px;
-  width: 37px;
-  height: 24px;
+  display: none;
 }
 
 .works-menu-toggle img {
@@ -115,7 +112,7 @@ button {
 }
 
 .works-home-small {
-  left: 98px;
+  left: 34px;
   top: 33px;
   width: 40px;
   height: 40px;
@@ -134,7 +131,7 @@ button {
 
 .works-home-small:hover,
 .works-home-small:focus-visible {
-  left: 90px;
+  left: 26px;
   top: 30px;
   width: 54px;
   height: 54px;
@@ -150,20 +147,7 @@ button {
 }
 
 .works-menu-panel {
-  position: absolute;
-  left: 26px;
-  top: 102px;
-  z-index: 120;
-  display: flex;
-  width: 90px;
-  padding: 6px 6px 7px;
-  border: 1.8px solid #111111;
-  border-radius: 3px;
-  background: #ffffff;
-  opacity: 0;
-  pointer-events: none;
-  flex-direction: column;
-  gap: 12px;
+  display: none;
 }
 
 .works-menu-panel::before {
@@ -334,18 +318,15 @@ body.is-works-scrolled .works-site-title {
   height: var(--card-height);
   overflow: hidden;
   border-radius: 6px;
-  outline: 3px solid transparent;
-  outline-offset: 0;
   cursor: pointer;
   transform-origin: center;
-  transition: outline-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .work-card:hover,
 .work-card:focus-visible {
-  outline-color: #1e1e1e;
-  box-shadow: 0 5px 12px rgba(30, 30, 30, 0.16);
-  transform: scale(1.015);
+  outline: none;
+  transform: scale(1.025);
 }
 
 .work-thumb {
@@ -356,7 +337,14 @@ body.is-works-scrolled .works-site-title {
   background-position: var(--thumb-x) var(--thumb-y);
   background-repeat: no-repeat;
   background-size: 1728px auto;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+
+.work-card:hover .work-thumb,
+.work-card:focus-visible .work-thumb {
+  opacity: 1;
 }
 
 .work-card-mobile-01 {

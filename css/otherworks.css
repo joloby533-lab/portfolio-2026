@@ -74,10 +74,7 @@ button {
 }
 
 .menu-toggle {
-  left: 36px;
-  top: 41px;
-  width: 37px;
-  height: 24px;
+  display: none;
 }
 
 .menu-toggle img {
@@ -101,7 +98,7 @@ button {
 }
 
 .works-index {
-  left: 98px;
+  left: 36px;
   top: 41px;
   width: 38px;
   height: 24px;
@@ -113,7 +110,7 @@ button {
 
 .works-index:hover,
 .works-index:focus-visible {
-  left: 90px;
+  left: 26px;
   top: 30px;
   width: 54px;
   height: 54px;
@@ -128,20 +125,7 @@ button {
 }
 
 .menu-panel {
-  position: absolute;
-  left: 26px;
-  top: 102px;
-  z-index: 120;
-  display: flex;
-  width: 90px;
-  padding: 6px 6px 7px;
-  border: 1.8px solid #111111;
-  border-radius: 3px;
-  background: #ffffff;
-  opacity: 0;
-  pointer-events: none;
-  flex-direction: column;
-  gap: 12px;
+  display: none;
 }
 
 .menu-panel::before {
