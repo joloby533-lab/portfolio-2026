@@ -50,7 +50,7 @@ button {
   position: relative;
   width: 1728px;
   top: 0;
-  padding-top: 118px;
+  padding-top: 28px;
 }
 
 .works-map {
@@ -67,11 +67,8 @@ button {
 }
 
 .works-edge-ui {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 0;
+  position: absolute;
+  inset: 0;
   z-index: 100;
   pointer-events: none;
 }
@@ -226,6 +223,10 @@ button {
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
+}
+
+body.is-works-scrolled .works-site-title {
+  display: none;
 }
 
 .works-about-button {

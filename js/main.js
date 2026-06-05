@@ -6,6 +6,7 @@ const rippleLayer = document.querySelector(".screen-ripple-layer");
 const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
 const DESIGN_WIDTH = 1728;
 const DESIGN_HEIGHT = 959;
+const MIN_STAGE_SCALE = 0.66;
 let computerFrameIndex = 0;
 let rippleTimer;
 const copyToastTimers = new WeakMap();
@@ -89,32 +90,29 @@ setupCopyEmailLinks();
 function scaleStage() {
   if (!stage) return;
 
-  const scale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
-  const left = (window.innerWidth - DESIGN_WIDTH * scale) / 2;
+  const fitScale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
+  const scale = Math.max(MIN_STAGE_SCALE, fitScale);
+  const stageWidth = DESIGN_WIDTH * scale;
+  const pageWidth = Math.max(window.innerWidth, stageWidth);
+  const left = (pageWidth - stageWidth) / 2;
   const top = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
-  const rightEdge = left + DESIGN_WIDTH * scale;
-  const bottomEdge = top + DESIGN_HEIGHT * scale;
 
+  document.documentElement.style.setProperty("--home-page-width", `${pageWidth}px`);
   stage.style.transform = `scale(${scale})`;
   stage.style.left = `${left}px`;
   stage.style.top = `${top}px`;
-  stage.style.setProperty("--home-edge-scale", `${1 / scale}`);
-  stage.style.setProperty("--home-menu-left", `${(36 - left) / scale}px`);
-  stage.style.setProperty("--home-menu-top", `${(41 - top) / scale}px`);
-  stage.style.setProperty("--home-menu-hover-left", `${(26 - left) / scale}px`);
-  stage.style.setProperty("--home-menu-hover-top", `${(30 - top) / scale}px`);
-  stage.style.setProperty("--home-works-index-left", `${(98 - left) / scale}px`);
-  stage.style.setProperty("--home-works-index-top", `${(41 - top) / scale}px`);
-  stage.style.setProperty("--home-site-title-right", `${(rightEdge - (window.innerWidth - 40)) / scale}px`);
-  stage.style.setProperty("--home-site-title-top", `${(28 - top) / scale}px`);
-  stage.style.setProperty("--home-menu-panel-left", `${(26 - left) / scale}px`);
-  stage.style.setProperty("--home-menu-panel-top", `${(102 - top) / scale}px`);
-  stage.style.setProperty("--home-about-left", `${(34 - left) / scale}px`);
-  stage.style.setProperty("--home-about-bottom", `${(bottomEdge - (window.innerHeight - 38)) / scale}px`);
-  stage.style.setProperty("--home-footer-right", `${(rightEdge - (window.innerWidth - 38)) / scale}px`);
-  stage.style.setProperty("--home-footer-bottom", `${(bottomEdge - (window.innerHeight - 32)) / scale}px`);
   stage.style.setProperty("--swim-left-edge", "0px");
   stage.style.setProperty("--swim-right-edge", `${DESIGN_WIDTH}px`);
+
+  if (pageWidth > window.innerWidth) {
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        left: (pageWidth - window.innerWidth) / 2,
+        top: 0,
+        behavior: "auto",
+      });
+    });
+  }
 }
 
 scaleStage();

@@ -67,5 +67,11 @@ function setWorksPageHeight() {
   worksPage.style.height = `${WORKS_DESIGN_HEIGHT}px`;
 }
 
+function updateWorksScrolledState() {
+  document.body.classList.toggle("is-works-scrolled", window.scrollY > 24);
+}
+
 setupCopyEmailLinks();
 setWorksPageHeight();
+updateWorksScrolledState();
+window.addEventListener("scroll", updateWorksScrolledState, { passive: true });
