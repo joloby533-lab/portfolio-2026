@@ -2,7 +2,6 @@ const worksStage = document.querySelector(".works-design-stage");
 const worksPage = document.querySelector(".works-page");
 const WORKS_DESIGN_WIDTH = 1728;
 const WORKS_DESIGN_HEIGHT = 1753;
-const HOME_DESIGN_HEIGHT = 959;
 const copyToastTimers = new WeakMap();
 
 function copyTextFallback(text) {
@@ -65,8 +64,7 @@ function scaleWorksStage() {
   if (!worksStage || !worksPage) return;
 
   const scale = window.innerWidth / WORKS_DESIGN_WIDTH;
-  const edgeScale = Math.min(window.innerWidth / WORKS_DESIGN_WIDTH, window.innerHeight / HOME_DESIGN_HEIGHT);
-  const edgeRatio = edgeScale / scale;
+  const edgeRatio = 1 / scale;
 
   worksStage.style.transform = `scale(${scale})`;
   worksStage.style.left = "0px";

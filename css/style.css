@@ -82,11 +82,12 @@ button {
 }
 
 .menu-toggle {
-  left: 36px;
-  top: 41px;
+  left: var(--home-menu-left, 36px);
+  top: var(--home-menu-top, 41px);
   width: 37px;
   height: 24px;
-  transform: translateX(var(--home-edge-left-x, 0px));
+  transform: scale(var(--home-edge-scale, 1));
+  transform-origin: left top;
 }
 
 .menu-toggle img {
@@ -95,8 +96,8 @@ button {
 
 .menu-toggle:hover,
 .menu-toggle.is-open {
-  left: 26px;
-  top: 30px;
+  left: var(--home-menu-hover-left, 26px);
+  top: var(--home-menu-hover-top, 30px);
   width: 54px;
   height: 54px;
   background: var(--ink);
@@ -110,11 +111,12 @@ button {
 }
 
 .works-index {
-  left: 98px;
-  top: 41px;
+  left: var(--home-works-index-left, 98px);
+  top: var(--home-works-index-top, 41px);
   width: 38px;
   height: 24px;
-  transform: translateX(var(--home-edge-left-x, 0px));
+  transform: scale(var(--home-edge-scale, 1));
+  transform-origin: left top;
 }
 
 .works-index img {
@@ -123,8 +125,8 @@ button {
 
 .site-title {
   position: absolute;
-  right: 40px;
-  top: 28px;
+  right: var(--home-site-title-right, 40px);
+  top: var(--home-site-title-top, 28px);
   z-index: 110;
   display: inline-flex;
   padding: 6px 10px 7px;
@@ -139,13 +141,14 @@ button {
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  transform: translateX(var(--home-edge-right-x, 0px));
+  transform: scale(var(--home-edge-scale, 1));
+  transform-origin: right top;
 }
 
 .menu-panel {
   position: absolute;
-  left: 26px;
-  top: 102px;
+  left: var(--home-menu-panel-left, 26px);
+  top: var(--home-menu-panel-top, 102px);
   z-index: 120;
   display: flex;
   width: 90px;
@@ -155,7 +158,8 @@ button {
   background: #ffffff;
   opacity: 0;
   pointer-events: none;
-  transform: translateX(var(--home-edge-left-x, 0px));
+  transform: scale(var(--home-edge-scale, 1));
+  transform-origin: left top;
   flex-direction: column;
   gap: 12px;
 }
@@ -204,8 +208,8 @@ button {
 
 .about-button {
   position: absolute;
-  left: 34px;
-  bottom: 38px;
+  left: var(--home-about-left, 34px);
+  bottom: var(--home-about-bottom, 38px);
   z-index: 110;
   display: inline-flex;
   padding: 6px 17px 6px 15px;
@@ -221,13 +225,14 @@ button {
   line-height: 28px;
   text-decoration: none;
   pointer-events: auto;
-  transform: translateX(var(--home-edge-left-x, 0px));
+  transform: scale(var(--home-edge-scale, 1));
+  transform-origin: left bottom;
 }
 
 .site-footer {
   position: absolute;
-  right: 38px;
-  bottom: 32px;
+  right: var(--home-footer-right, 38px);
+  bottom: var(--home-footer-bottom, 32px);
   z-index: 110;
   color: var(--footer-gray);
   font-family: "SourceCodePro", "Courier New", monospace;
@@ -237,7 +242,8 @@ button {
   text-align: right;
   letter-spacing: 0;
   pointer-events: auto;
-  transform: translateX(var(--home-edge-right-x, 0px));
+  transform: scale(var(--home-edge-scale, 1));
+  transform-origin: right bottom;
 }
 
 .site-footer p {

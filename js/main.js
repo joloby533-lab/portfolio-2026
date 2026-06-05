@@ -92,12 +92,27 @@ function scaleStage() {
   const scale = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
   const left = (window.innerWidth - DESIGN_WIDTH * scale) / 2;
   const top = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+  const rightEdge = left + DESIGN_WIDTH * scale;
+  const bottomEdge = top + DESIGN_HEIGHT * scale;
 
   stage.style.transform = `scale(${scale})`;
   stage.style.left = `${left}px`;
   stage.style.top = `${top}px`;
-  stage.style.setProperty("--home-edge-left-x", `${-left / scale}px`);
-  stage.style.setProperty("--home-edge-right-x", `${left / scale}px`);
+  stage.style.setProperty("--home-edge-scale", `${1 / scale}`);
+  stage.style.setProperty("--home-menu-left", `${(36 - left) / scale}px`);
+  stage.style.setProperty("--home-menu-top", `${(41 - top) / scale}px`);
+  stage.style.setProperty("--home-menu-hover-left", `${(26 - left) / scale}px`);
+  stage.style.setProperty("--home-menu-hover-top", `${(30 - top) / scale}px`);
+  stage.style.setProperty("--home-works-index-left", `${(98 - left) / scale}px`);
+  stage.style.setProperty("--home-works-index-top", `${(41 - top) / scale}px`);
+  stage.style.setProperty("--home-site-title-right", `${(rightEdge - (window.innerWidth - 40)) / scale}px`);
+  stage.style.setProperty("--home-site-title-top", `${(28 - top) / scale}px`);
+  stage.style.setProperty("--home-menu-panel-left", `${(26 - left) / scale}px`);
+  stage.style.setProperty("--home-menu-panel-top", `${(102 - top) / scale}px`);
+  stage.style.setProperty("--home-about-left", `${(34 - left) / scale}px`);
+  stage.style.setProperty("--home-about-bottom", `${(bottomEdge - (window.innerHeight - 38)) / scale}px`);
+  stage.style.setProperty("--home-footer-right", `${(rightEdge - (window.innerWidth - 38)) / scale}px`);
+  stage.style.setProperty("--home-footer-bottom", `${(bottomEdge - (window.innerHeight - 32)) / scale}px`);
   stage.style.setProperty("--swim-left-edge", "0px");
   stage.style.setProperty("--swim-right-edge", `${DESIGN_WIDTH}px`);
 }

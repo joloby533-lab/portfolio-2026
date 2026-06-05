@@ -236,11 +236,11 @@ button {
 
 .works-about-button {
   position: fixed;
-  left: 28px;
-  bottom: 28px;
+  left: 34px;
+  bottom: 38px;
   z-index: 110;
   display: inline-flex;
-  padding: 5px 15px 5px 13px;
+  padding: 6px 17px 6px 15px;
   align-items: center;
   justify-content: center;
   border: 2px solid #1e1e1e;
@@ -248,13 +248,11 @@ button {
   background: #ffffff;
   color: #1e1e1e;
   font-family: "SourceCodePro", "Courier New", monospace;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
-  line-height: 25px;
+  line-height: 28px;
   text-decoration: none;
   pointer-events: auto;
-  transform: scale(var(--works-stage-scale, 1));
-  transform-origin: left bottom;
 }
 
 .works-home-fixed {
