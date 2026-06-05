@@ -58,11 +58,10 @@ button {
   background: #ffffff;
 }
 
-/* Edge UI sits inside the scaled design stage. */
 .fixed-edge-ui {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 1000;
   pointer-events: none;
 }
 
@@ -121,6 +120,22 @@ button {
 
 .works-index img {
   width: 38px;
+}
+
+.works-index:hover,
+.works-index:focus-visible {
+  left: 90px;
+  top: 30px;
+  width: 54px;
+  height: 54px;
+  background: var(--ink);
+  outline: none;
+}
+
+.works-index:hover img,
+.works-index:focus-visible img {
+  width: 38px;
+  filter: invert(1);
 }
 
 .menu-panel {
@@ -370,10 +385,10 @@ button {
 }
 
 .works-detail-close {
-  position: absolute;
+  position: fixed;
   right: 38px;
   top: 30px;
-  z-index: 110;
+  z-index: 1000;
   display: block;
   width: 45px;
   height: 45px;
