@@ -17,20 +17,24 @@ let computerFrameIndex = 0;
 let isComputerPreviewActive = false;
 let rippleTimer;
 const copyToastTimers = new WeakMap();
+const computerFrameCache = new Map();
 
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
-projectComputerFrames.forEach(([, frameSrc]) => {
-  const previewImage = new Image();
-  previewImage.src = frameSrc;
-});
+function preloadComputerFrame(frameSrc) {
+  if (computerFrameCache.has(frameSrc)) return computerFrameCache.get(frameSrc);
 
-computerFrames.forEach((frameSrc) => {
   const frameImage = new Image();
+  frameImage.decoding = "sync";
+  frameImage.loading = "eager";
   frameImage.src = frameSrc;
-});
+  computerFrameCache.set(frameSrc, frameImage);
+  return frameImage;
+}
+
+[...computerFrames, ...projectComputerFrames.map(([, frameSrc]) => frameSrc)].forEach(preloadComputerFrame);
 
 function parseCssTimeToMs(value) {
   const text = String(value || "").trim();
@@ -216,14 +220,15 @@ function showComputerPreview(frameSrc) {
   if (!computerFrame) return;
 
   isComputerPreviewActive = true;
-  computerFrame.src = frameSrc;
+  computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
 }
 
 function restoreComputerFrame() {
   if (!computerFrame) return;
 
   isComputerPreviewActive = false;
-  computerFrame.src = computerFrames[computerFrameIndex];
+  const frameSrc = computerFrames[computerFrameIndex];
+  computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
 }
 
 projectComputerFrames.forEach(([fishClass, frameSrc]) => {
@@ -298,7 +303,8 @@ document.addEventListener("keydown", (event) => {
 setInterval(() => {
   computerFrameIndex = (computerFrameIndex + 1) % computerFrames.length;
   if (!isComputerPreviewActive) {
-    computerFrame.src = computerFrames[computerFrameIndex];
+    const frameSrc = computerFrames[computerFrameIndex];
+    computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
   }
 }, 3800);
 
