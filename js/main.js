@@ -4,7 +4,7 @@ const stage = document.querySelector(".stage");
 const computerFrame = document.querySelector(".computer-frame");
 const rippleLayer = document.querySelector(".screen-ripple-layer");
 const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
-const projectComputerFrames = Array.from({ length: 9 }, (_, index) => {
+const projectComputerFrames = Array.from({ length: 10 }, (_, index) => {
   const projectNumber = String(index + 1).padStart(2, "0");
   return [`fish-${projectNumber}`, `assets/computer-frame-project${projectNumber}.svg`];
 });

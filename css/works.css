@@ -326,7 +326,7 @@ body.is-works-scrolled .works-site-title {
 .work-card:hover,
 .work-card:focus-visible {
   outline: none;
-  transform: scale(1.025);
+  transform: scale(1.055);
 }
 
 .work-thumb {
