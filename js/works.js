@@ -1,6 +1,5 @@
 const worksStage = document.querySelector(".works-design-stage");
 const worksPage = document.querySelector(".works-page");
-const WORKS_DESIGN_WIDTH = 1728;
 const WORKS_DESIGN_HEIGHT = 1753;
 const copyToastTimers = new WeakMap();
 
@@ -60,31 +59,13 @@ function showCopyToast(link) {
   copyToastTimers.set(footer, timer);
 }
 
-function scaleWorksStage() {
+function setWorksPageHeight() {
   if (!worksStage || !worksPage) return;
 
-  const scale = window.innerWidth / WORKS_DESIGN_WIDTH;
-  const edgeRatio = 1 / scale;
-
-  worksStage.style.transform = `scale(${scale})`;
   worksStage.style.left = "0px";
   worksStage.style.top = "0px";
-  worksPage.style.height = `${WORKS_DESIGN_HEIGHT * scale}px`;
-  document.documentElement.style.setProperty("--works-stage-scale", scale);
-  document.documentElement.style.setProperty("--works-edge-scale-ratio", edgeRatio);
-  document.documentElement.style.setProperty("--works-menu-left", `${36 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-menu-hover-left", `${26 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-home-small-left", `${98 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-home-small-hover-left", `${90 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-menu-panel-left", `${26 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-title-right", `${40 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-top-41", `${41 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-top-33", `${33 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-top-30", `${30 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-title-top", `${28 * edgeRatio}px`);
-  document.documentElement.style.setProperty("--works-menu-panel-top", `${102 * edgeRatio}px`);
+  worksPage.style.height = `${WORKS_DESIGN_HEIGHT}px`;
 }
 
 setupCopyEmailLinks();
-scaleWorksStage();
-window.addEventListener("resize", scaleWorksStage);
+setWorksPageHeight();
