@@ -80,6 +80,7 @@ function showCopyToast(link) {
 document.querySelectorAll(".fish-card").forEach((fish, index) => {
   const clone = fish.cloneNode(true);
   const fishId = `fish-${index + 1}`;
+  const isPulseFish = fish.classList.contains("fish-10");
 
   fish.dataset.loopFish = fishId;
   clone.dataset.loopFish = fishId;
@@ -101,11 +102,13 @@ document.querySelectorAll(".fish-card").forEach((fish, index) => {
     image.dataset.defaultSrc = defaultSrc;
     image.dataset.hoverSrc = hoverSrc;
 
-    for (let dropIndex = 1; dropIndex <= 3; dropIndex += 1) {
-      const drop = document.createElement("span");
-      drop.className = `fish-water-drop fish-water-drop-${dropIndex}`;
-      drop.setAttribute("aria-hidden", "true");
-      item.append(drop);
+    if (!isPulseFish) {
+      for (let dropIndex = 1; dropIndex <= 3; dropIndex += 1) {
+        const drop = document.createElement("span");
+        drop.className = `fish-water-drop fish-water-drop-${dropIndex}`;
+        drop.setAttribute("aria-hidden", "true");
+        item.append(drop);
+      }
     }
   });
 
@@ -114,7 +117,8 @@ document.querySelectorAll(".fish-card").forEach((fish, index) => {
       const image = node.querySelector("img");
 
       node.classList.toggle("is-paused", isActive);
-      node.classList.toggle("is-fish-hover", isActive);
+      node.classList.toggle("is-fish-hover", isActive && !isPulseFish);
+      node.classList.toggle("is-fish-pulse", isActive && isPulseFish);
 
       if (image?.dataset.hoverSrc && image.dataset.defaultSrc) {
         image.src = isActive ? image.dataset.hoverSrc : image.dataset.defaultSrc;

@@ -549,6 +549,10 @@ button {
   animation-delay: 0.38s;
 }
 
+.fish-card.is-fish-pulse img {
+  animation: fish-pulse 0.9s ease-in-out infinite;
+}
+
 .fish-01 {
   --fish-width: 430px;
   --fish-left: 210px;
@@ -648,6 +652,17 @@ button {
   --swim-delay: -24s;
 }
 
+.fish-10 {
+  --fish-width: 285px;
+  --fish-left: 1510px;
+  --fish-top: 245px;
+  --fish-z: 22;
+  --swim-name: swim-rtl;
+  --clone-offset: var(--loop-span);
+  --swim-duration: 48s;
+  --swim-delay: -8s;
+}
+
 @keyframes fish-struggle {
   0%,
   100% {
@@ -681,6 +696,16 @@ button {
   }
 }
 
+@keyframes fish-pulse {
+  0%,
+  100% {
+    transform: scale(1.08);
+  }
+  50% {
+    transform: scale(1.16);
+  }
+}
+
 @keyframes swim-ltr {
   0% {
     transform: translateX(var(--loop-offset));
@@ -701,7 +726,8 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .fish-card.is-fish-hover img,
-  .fish-card.is-fish-hover .fish-water-drop {
+  .fish-card.is-fish-hover .fish-water-drop,
+  .fish-card.is-fish-pulse img {
     animation: none;
   }
 }
