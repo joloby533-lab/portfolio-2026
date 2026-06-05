@@ -121,6 +121,22 @@ button {
   width: 38px;
 }
 
+.works-index:hover,
+.works-index:focus-visible {
+  left: 90px;
+  top: 30px;
+  width: 54px;
+  height: 54px;
+  background: var(--ink);
+  outline: none;
+}
+
+.works-index:hover img,
+.works-index:focus-visible img {
+  width: 38px;
+  filter: invert(1);
+}
+
 .site-title {
   position: absolute;
   right: 40px;
@@ -219,6 +235,13 @@ button {
   line-height: 28px;
   text-decoration: none;
   pointer-events: auto;
+}
+
+.about-button:hover,
+.about-button:focus-visible {
+  background: var(--ink);
+  color: #ffffff;
+  outline: none;
 }
 
 .site-footer {
