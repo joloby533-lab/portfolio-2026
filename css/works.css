@@ -329,6 +329,11 @@ body.is-works-scrolled .works-site-title {
 .work-card:hover,
 .work-card:focus-visible {
   outline: none;
+  transform: scale(1.085);
+}
+
+.work-card.is-coming-soon:hover,
+.work-card.is-coming-soon:focus-visible {
   transform: scale(1.055);
 }
 
