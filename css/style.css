@@ -82,10 +82,11 @@ button {
 }
 
 .menu-toggle {
-  left: 44px;
+  left: 36px;
   top: 41px;
   width: 37px;
   height: 24px;
+  transform: translateX(var(--home-edge-left-x, 0px));
 }
 
 .menu-toggle img {
@@ -94,7 +95,7 @@ button {
 
 .menu-toggle:hover,
 .menu-toggle.is-open {
-  left: 34px;
+  left: 26px;
   top: 30px;
   width: 54px;
   height: 54px;
@@ -109,10 +110,11 @@ button {
 }
 
 .works-index {
-  left: 106px;
+  left: 98px;
   top: 41px;
   width: 38px;
   height: 24px;
+  transform: translateX(var(--home-edge-left-x, 0px));
 }
 
 .works-index img {
@@ -121,7 +123,7 @@ button {
 
 .site-title {
   position: absolute;
-  right: 48px;
+  right: 40px;
   top: 28px;
   z-index: 110;
   display: inline-flex;
@@ -136,11 +138,12 @@ button {
   text-decoration: none;
   white-space: nowrap;
   pointer-events: auto;
+  transform: translateX(var(--home-edge-right-x, 0px));
 }
 
 .menu-panel {
   position: absolute;
-  left: 34px;
+  left: 26px;
   top: 102px;
   z-index: 120;
   display: flex;
@@ -151,7 +154,7 @@ button {
   background: #ffffff;
   opacity: 0;
   pointer-events: none;
-  transform: none;
+  transform: translateX(var(--home-edge-left-x, 0px));
   flex-direction: column;
   gap: 12px;
 }
@@ -168,7 +171,6 @@ button {
 .menu-panel.is-open {
   opacity: 1;
   pointer-events: auto;
-  transform: none;
 }
 
 .menu-toggle:hover ~ .menu-panel,
@@ -201,7 +203,7 @@ button {
 
 .about-button {
   position: absolute;
-  left: 42px;
+  left: 34px;
   bottom: 38px;
   z-index: 110;
   display: inline-flex;
@@ -218,11 +220,12 @@ button {
   line-height: 28px;
   text-decoration: none;
   pointer-events: auto;
+  transform: translateX(var(--home-edge-left-x, 0px));
 }
 
 .site-footer {
   position: absolute;
-  right: 46px;
+  right: 38px;
   bottom: 32px;
   z-index: 110;
   color: var(--footer-gray);
@@ -233,6 +236,7 @@ button {
   text-align: right;
   letter-spacing: 0;
   pointer-events: auto;
+  transform: translateX(var(--home-edge-right-x, 0px));
 }
 
 .site-footer p {
@@ -386,10 +390,10 @@ button {
   --fish-width: 430px;
   --fish-left: 210px;
   --fish-top: 110px;
-  --fish-z: 20;
+  --fish-z: 16;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
-  --swim-duration: 58s;
+  --swim-duration: 64s;
   --swim-delay: -14s;
 }
 
@@ -397,11 +401,11 @@ button {
   --fish-width: 330px;
   --fish-left: 1145px;
   --fish-top: 105px;
-  --fish-z: 20;
+  --fish-z: 24;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
-  --swim-duration: 54s;
-  --swim-delay: -41s;
+  --swim-duration: 50s;
+  --swim-delay: -37s;
 }
 
 .fish-03 {
@@ -419,10 +423,10 @@ button {
   --fish-width: 420px;
   --fish-left: 980px;
   --fish-top: 565px;
-  --fish-z: 25;
+  --fish-z: 17;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
-  --swim-duration: 66s;
+  --swim-duration: 70s;
   --swim-delay: -51s;
 }
 
@@ -441,44 +445,44 @@ button {
   --fish-width: 250px;
   --fish-left: 1365px;
   --fish-top: 365px;
-  --fish-z: 18;
+  --fish-z: 34;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
-  --swim-duration: 50s;
-  --swim-delay: -6s;
+  --swim-duration: 38s;
+  --swim-delay: -12s;
 }
 
 .fish-07 {
   --fish-width: 300px;
   --fish-left: 140px;
   --fish-top: 675px;
-  --fish-z: 18;
+  --fish-z: 28;
   --swim-name: swim-ltr;
   --clone-offset: calc(-1 * var(--loop-span));
-  --swim-duration: 64s;
-  --swim-delay: -47s;
+  --swim-duration: 46s;
+  --swim-delay: -31s;
 }
 
 .fish-08 {
   --fish-width: 230px;
   --fish-left: 145px;
   --fish-top: 400px;
-  --fish-z: 18;
+  --fish-z: 36;
   --swim-name: swim-rtl;
   --clone-offset: var(--loop-span);
-  --swim-duration: 46s;
-  --swim-delay: -27s;
+  --swim-duration: 34s;
+  --swim-delay: -19s;
 }
 
 .fish-09 {
   --fish-width: 240px;
   --fish-left: 1365px;
   --fish-top: 720px;
-  --fish-z: 18;
+  --fish-z: 35;
   --swim-name: swim-ltr;
   --clone-offset: calc(-1 * var(--loop-span));
-  --swim-duration: 56s;
-  --swim-delay: -11s;
+  --swim-duration: 36s;
+  --swim-delay: -24s;
 }
 
 @keyframes swim-ltr {

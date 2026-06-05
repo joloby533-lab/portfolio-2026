@@ -86,7 +86,7 @@ button {
 }
 
 .menu-toggle {
-  left: 44px;
+  left: 36px;
   top: 41px;
   width: 37px;
   height: 24px;
@@ -98,7 +98,7 @@ button {
 
 .menu-toggle:hover,
 .menu-toggle.is-open {
-  left: 34px;
+  left: 26px;
   top: 30px;
   width: 54px;
   height: 54px;
@@ -113,7 +113,7 @@ button {
 }
 
 .works-index {
-  left: 106px;
+  left: 98px;
   top: 41px;
   width: 38px;
   height: 24px;
@@ -125,7 +125,7 @@ button {
 
 .menu-panel {
   position: absolute;
-  left: 34px;
+  left: 26px;
   top: 102px;
   z-index: 120;
   display: flex;
@@ -186,7 +186,7 @@ button {
 
 .about-button {
   position: absolute;
-  left: 42px;
+  left: 34px;
   bottom: 38px;
   z-index: 110;
   display: inline-flex;
@@ -211,7 +211,7 @@ button {
 
 .site-footer {
   position: absolute;
-  right: 46px;
+  right: 38px;
   bottom: 32px;
   z-index: 110;
   color: var(--footer-gray);
@@ -354,7 +354,7 @@ button {
 
 .works-detail-close {
   position: absolute;
-  right: 46px;
+  right: 38px;
   top: 30px;
   z-index: 110;
   display: block;

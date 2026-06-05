@@ -37,6 +37,8 @@ function scaleStage() {
   stage.style.transform = `scale(${scale})`;
   stage.style.left = `${left}px`;
   stage.style.top = `${top}px`;
+  stage.style.setProperty("--home-edge-left-x", `${-left / scale}px`);
+  stage.style.setProperty("--home-edge-right-x", `${left / scale}px`);
   stage.style.setProperty("--swim-left-edge", "0px");
   stage.style.setProperty("--swim-right-edge", `${DESIGN_WIDTH}px`);
 }
