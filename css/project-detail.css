@@ -238,6 +238,23 @@ button {
   text-underline-offset: 4px;
 }
 
+.copy-toast-icon {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: 185px;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.copy-toast-icon.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .works-detail-stage {
   position: absolute;
   left: 0;

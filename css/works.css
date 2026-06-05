@@ -89,10 +89,12 @@ button {
 }
 
 .works-menu-toggle {
-  left: 36px;
-  top: 41px;
+  left: var(--works-menu-left, 36px);
+  top: var(--works-top-41, 41px);
   width: 37px;
   height: 24px;
+  transform: scale(var(--works-edge-scale-ratio, 1));
+  transform-origin: left top;
 }
 
 .works-menu-toggle img {
@@ -102,8 +104,8 @@ button {
 }
 
 .works-menu-toggle:hover {
-  left: 26px;
-  top: 30px;
+  left: var(--works-menu-hover-left, 26px);
+  top: var(--works-top-30, 30px);
   width: 54px;
   height: 54px;
   background: #1e1e1e;
@@ -116,10 +118,12 @@ button {
 }
 
 .works-home-small {
-  left: 98px;
-  top: 33px;
+  left: var(--works-home-small-left, 98px);
+  top: var(--works-top-33, 33px);
   width: 40px;
   height: 40px;
+  transform: scale(var(--works-edge-scale-ratio, 1));
+  transform-origin: left top;
 }
 
 .works-home-small::before {
@@ -135,8 +139,8 @@ button {
 
 .works-home-small:hover,
 .works-home-small:focus-visible {
-  left: 90px;
-  top: 30px;
+  left: var(--works-home-small-hover-left, 90px);
+  top: var(--works-top-30, 30px);
   width: 54px;
   height: 54px;
   background-color: #1e1e1e;
@@ -152,8 +156,8 @@ button {
 
 .works-menu-panel {
   position: absolute;
-  left: 26px;
-  top: 102px;
+  left: var(--works-menu-panel-left, 26px);
+  top: var(--works-menu-panel-top, 102px);
   z-index: 120;
   display: flex;
   width: 90px;
@@ -163,6 +167,8 @@ button {
   background: #ffffff;
   opacity: 0;
   pointer-events: none;
+  transform: scale(var(--works-edge-scale-ratio, 1));
+  transform-origin: left top;
   flex-direction: column;
   gap: 12px;
 }
@@ -208,8 +214,8 @@ button {
 
 .works-site-title {
   position: absolute;
-  right: 40px;
-  top: 28px;
+  right: var(--works-title-right, 40px);
+  top: var(--works-title-top, 28px);
   z-index: 110;
   display: inline-flex;
   padding: 6px 10px 7px;
@@ -222,16 +228,19 @@ button {
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
-  pointer-events: auto;
+  pointer-events: none;
+  user-select: none;
+  transform: scale(var(--works-edge-scale-ratio, 1));
+  transform-origin: right top;
 }
 
 .works-about-button {
   position: fixed;
-  left: 34px;
-  bottom: 38px;
+  left: 28px;
+  bottom: 28px;
   z-index: 110;
   display: inline-flex;
-  padding: 6px 17px 6px 15px;
+  padding: 5px 15px 5px 13px;
   align-items: center;
   justify-content: center;
   border: 2px solid #1e1e1e;
@@ -239,9 +248,9 @@ button {
   background: #ffffff;
   color: #1e1e1e;
   font-family: "SourceCodePro", "Courier New", monospace;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
-  line-height: 28px;
+  line-height: 25px;
   text-decoration: none;
   pointer-events: auto;
   transform: scale(var(--works-stage-scale, 1));
@@ -291,6 +300,28 @@ button {
 .works-site-footer a {
   color: inherit;
   text-decoration: none;
+}
+
+.works-site-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.copy-toast-icon {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: 185px;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.copy-toast-icon.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .works-project-hotspot {

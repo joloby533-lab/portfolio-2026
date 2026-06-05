@@ -137,7 +137,8 @@ button {
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
-  pointer-events: auto;
+  pointer-events: none;
+  user-select: none;
   transform: translateX(var(--home-edge-right-x, 0px));
 }
 
@@ -251,6 +252,23 @@ button {
 .site-footer a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.copy-toast-icon {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: 185px;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.copy-toast-icon.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Layer 2: centered stage. */
