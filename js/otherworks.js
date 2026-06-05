@@ -6,7 +6,6 @@ const previousButton = document.querySelector(".otherworks-nav-left");
 const nextButton = document.querySelector(".otherworks-nav-right");
 const modal = document.querySelector(".otherworks-modal");
 const modalVideo = document.querySelector(".otherworks-modal-video");
-const modalClose = document.querySelector(".otherworks-modal-close");
 const modalBackdrop = document.querySelector(".otherworks-modal-backdrop");
 const soundToggle = document.querySelector(".otherworks-sound-toggle");
 const copyToastTimers = new WeakMap();
@@ -187,7 +186,6 @@ cards.forEach((card) => {
   card.addEventListener("click", () => openModal(card));
 });
 
-modalClose?.addEventListener("click", closeModal);
 modalBackdrop?.addEventListener("click", closeModal);
 soundToggle?.addEventListener("click", toggleModalSound);
 previousButton?.addEventListener("click", () => showAdjacentModal(-1));

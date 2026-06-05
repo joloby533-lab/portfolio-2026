@@ -268,7 +268,7 @@ button {
 
 .otherworks-collage {
   position: absolute;
-  left: 190px;
+  left: 145px;
   top: 120px;
   width: 1348px;
   height: 760px;
@@ -356,16 +356,16 @@ button {
 
 .otherworks-card-07 {
   left: 1220px;
-  top: 420px;
-  width: 220px;
-  height: 158px;
+  top: 250px;
+  width: 216px;
+  height: 234px;
 }
 
 .otherworks-card-08 {
   left: 1220px;
-  top: 628px;
-  width: 220px;
-  height: 158px;
+  top: 500px;
+  width: 216px;
+  height: 224px;
 }
 
 .otherworks-nav {
@@ -409,8 +409,7 @@ button {
   left: 1632px;
 }
 
-.otherworks-close,
-.otherworks-modal-close {
+.otherworks-close {
   display: block;
   background-image: url("../assets/about-close-default.png");
   background-repeat: no-repeat;
@@ -428,9 +427,7 @@ button {
 }
 
 .otherworks-close:hover,
-.otherworks-close:focus-visible,
-.otherworks-modal-close:hover,
-.otherworks-modal-close:focus-visible {
+.otherworks-close:focus-visible {
   background-image: url("../assets/about-close-hover.png");
   outline: none;
 }
@@ -481,19 +478,6 @@ button {
   object-fit: contain;
   background: transparent;
   box-shadow: 0 12px 34px rgba(30, 30, 30, 0.16);
-}
-
-.otherworks-modal-close {
-  position: absolute;
-  right: -62px;
-  top: -6px;
-  z-index: 2;
-  width: 45px;
-  height: 45px;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
 }
 
 .otherworks-sound-toggle {
