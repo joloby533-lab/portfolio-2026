@@ -82,6 +82,7 @@ const configuredImages = getConfiguredImages();
 const detailImages = configuredImages.length > 0 ? configuredImages : defaultDetailImages;
 let currentImageIndex = 0;
 let adjacentPreloaders = [];
+let progressDots = [];
 const copyToastTimers = new WeakMap();
 
 function copyTextFallback(text) {
@@ -156,7 +157,32 @@ function showProjectImage(nextIndex) {
   detailImage.src = detailImages[currentImageIndex].src;
   detailImage.alt = detailImages[currentImageIndex].alt;
   detailScroller.scrollTop = 0;
+  updateProgressIndicators();
   preloadAdjacentImages();
+}
+
+function setupProgressIndicators() {
+  if (!detailStage || detailImages.length <= 1) return;
+
+  const progress = document.createElement("div");
+  progress.className = "works-detail-progress";
+  progress.setAttribute("aria-hidden", "true");
+
+  progressDots = detailImages.map((_, index) => {
+    const dot = document.createElement("span");
+    dot.className = "works-detail-progress-dot";
+    dot.classList.toggle("is-active", index === currentImageIndex);
+    progress.append(dot);
+    return dot;
+  });
+
+  detailStage.append(progress);
+}
+
+function updateProgressIndicators() {
+  progressDots.forEach((dot, index) => {
+    dot.classList.toggle("is-active", index === currentImageIndex);
+  });
 }
 
 function preloadAdjacentImages() {
@@ -174,6 +200,7 @@ function preloadAdjacentImages() {
 }
 
 setupCopyEmailLinks();
+setupProgressIndicators();
 
 if (menuToggle && menuPanel) {
   menuToggle.addEventListener("click", (event) => {
