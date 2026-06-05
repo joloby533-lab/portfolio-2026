@@ -2,6 +2,7 @@ const menuToggle = document.querySelector(".menu-toggle");
 const menuPanel = document.querySelector(".menu-panel");
 const stage = document.querySelector(".otherworks-stage");
 const cards = Array.from(document.querySelectorAll(".otherworks-card"));
+const pagePanels = Array.from(document.querySelectorAll(".otherworks-page-panel"));
 const previousButton = document.querySelector(".otherworks-nav-left");
 const nextButton = document.querySelector(".otherworks-nav-right");
 const modal = document.querySelector(".otherworks-modal");
@@ -12,6 +13,7 @@ const copyToastTimers = new WeakMap();
 const DESIGN_WIDTH = 1728;
 const DESIGN_HEIGHT = 959;
 let activeCardIndex = 0;
+let activePageIndex = 0;
 
 function scaleStage() {
   if (!stage) return;
@@ -153,10 +155,25 @@ function toggleModalSound() {
   setModalMuted(!modalVideo.muted);
 }
 
+function switchOtherworksPage(direction) {
+  if (pagePanels.length === 0) return;
+
+  cards.forEach(resetCardVideo);
+  activePageIndex = (activePageIndex + direction + pagePanels.length) % pagePanels.length;
+  pagePanels.forEach((panel, index) => {
+    panel.classList.toggle("is-active", index === activePageIndex);
+  });
+}
+
 function showAdjacentModal(direction) {
   if (cards.length === 0) return;
 
   const isModalOpen = modal?.classList.contains("is-open");
+  if (!isModalOpen) {
+    switchOtherworksPage(direction);
+    return;
+  }
+
   const nextIndex = isModalOpen ? (activeCardIndex + direction + cards.length) % cards.length : direction > 0 ? 0 : cards.length - 1;
   openModal(cards[nextIndex]);
 }
