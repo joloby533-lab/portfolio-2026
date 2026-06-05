@@ -473,12 +473,49 @@ button {
 }
 
 .fish-card img {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   height: auto;
   filter: drop-shadow(0 4px 7px rgba(30, 30, 30, 0.22));
   transform-origin: center;
   transition: transform 0.35s ease, filter 0.35s ease;
+  will-change: transform;
+}
+
+.fish-water-drop {
+  position: absolute;
+  top: 13%;
+  z-index: 3;
+  display: block;
+  width: 9.5%;
+  aspect-ratio: 48 / 71;
+  background-image: url("../assets/fish-water-hover.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-34%) scale(0.86);
+  will-change: transform, opacity;
+}
+
+.fish-water-drop-1 {
+  left: 68%;
+  width: 9%;
+}
+
+.fish-water-drop-2 {
+  left: 80%;
+  top: 8%;
+  width: 10.5%;
+}
+
+.fish-water-drop-3 {
+  left: 74%;
+  top: 36%;
+  width: 9.8%;
 }
 
 .fish-card:hover,
@@ -494,6 +531,22 @@ button {
 .fish-card.is-paused img {
   filter: drop-shadow(0 8px 13px rgba(30, 30, 30, 0.24));
   transform: scale(1.1);
+}
+
+.fish-card.is-fish-hover img {
+  animation: fish-struggle 0.52s ease-in-out infinite;
+}
+
+.fish-card.is-fish-hover .fish-water-drop {
+  animation: fish-water-fall 1.08s linear infinite;
+}
+
+.fish-card.is-fish-hover .fish-water-drop-2 {
+  animation-delay: 0.18s;
+}
+
+.fish-card.is-fish-hover .fish-water-drop-3 {
+  animation-delay: 0.38s;
 }
 
 .fish-01 {
@@ -595,6 +648,39 @@ button {
   --swim-delay: -24s;
 }
 
+@keyframes fish-struggle {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg) scale(1.1);
+  }
+  22% {
+    transform: translateX(-4px) rotate(-1.1deg) scale(1.1);
+  }
+  46% {
+    transform: translateX(3px) rotate(0.85deg) scale(1.1);
+  }
+  70% {
+    transform: translateX(-2px) rotate(-0.55deg) scale(1.1);
+  }
+}
+
+@keyframes fish-water-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-34%) scale(0.82);
+  }
+  12% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 0.96;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(170%) scale(0.95);
+  }
+}
+
 @keyframes swim-ltr {
   0% {
     transform: translateX(var(--loop-offset));
@@ -610,5 +696,12 @@ button {
   }
   100% {
     transform: translateX(calc(var(--loop-offset) - var(--loop-span)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fish-card.is-fish-hover img,
+  .fish-card.is-fish-hover .fish-water-drop {
+    animation: none;
   }
 }

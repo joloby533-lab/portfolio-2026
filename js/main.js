@@ -90,8 +90,43 @@ document.querySelectorAll(".fish-card").forEach((fish, index) => {
 
   const pair = [fish, clone];
   pair.forEach((item) => {
-    item.addEventListener("mouseenter", () => pair.forEach((node) => node.classList.add("is-paused")));
-    item.addEventListener("mouseleave", () => pair.forEach((node) => node.classList.remove("is-paused")));
+    const image = item.querySelector("img");
+    if (!image) return;
+
+    const defaultSrc = image.getAttribute("src");
+    const hoverSrc = defaultSrc.replace(/\.png(?:\?.*)?$/, "-hover.png");
+    const hoverPreload = new Image();
+    hoverPreload.src = hoverSrc;
+
+    image.dataset.defaultSrc = defaultSrc;
+    image.dataset.hoverSrc = hoverSrc;
+
+    for (let dropIndex = 1; dropIndex <= 3; dropIndex += 1) {
+      const drop = document.createElement("span");
+      drop.className = `fish-water-drop fish-water-drop-${dropIndex}`;
+      drop.setAttribute("aria-hidden", "true");
+      item.append(drop);
+    }
+  });
+
+  const setFishHoverActive = (isActive) => {
+    pair.forEach((node) => {
+      const image = node.querySelector("img");
+
+      node.classList.toggle("is-paused", isActive);
+      node.classList.toggle("is-fish-hover", isActive);
+
+      if (image?.dataset.hoverSrc && image.dataset.defaultSrc) {
+        image.src = isActive ? image.dataset.hoverSrc : image.dataset.defaultSrc;
+      }
+    });
+  };
+
+  pair.forEach((item) => {
+    item.addEventListener("mouseenter", () => setFishHoverActive(true));
+    item.addEventListener("focus", () => setFishHoverActive(true));
+    item.addEventListener("mouseleave", () => setFishHoverActive(false));
+    item.addEventListener("blur", () => setFishHoverActive(false));
   });
 });
 
