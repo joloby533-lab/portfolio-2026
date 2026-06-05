@@ -4,12 +4,22 @@ const stage = document.querySelector(".stage");
 const computerFrame = document.querySelector(".computer-frame");
 const rippleLayer = document.querySelector(".screen-ripple-layer");
 const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
+const projectComputerFrames = Array.from({ length: 9 }, (_, index) => {
+  const projectNumber = String(index + 1).padStart(2, "0");
+  return [`fish-${projectNumber}`, `assets/computer-frame-project${projectNumber}.svg`];
+});
 const DESIGN_WIDTH = 1728;
 const DESIGN_HEIGHT = 959;
 const MIN_STAGE_SCALE = 0.66;
 let computerFrameIndex = 0;
+let isComputerPreviewActive = false;
 let rippleTimer;
 const copyToastTimers = new WeakMap();
+
+projectComputerFrames.forEach(([, frameSrc]) => {
+  const previewImage = new Image();
+  previewImage.src = frameSrc;
+});
 
 function copyTextFallback(text) {
   const textarea = document.createElement("textarea");
@@ -85,6 +95,29 @@ document.querySelectorAll(".fish-card").forEach((fish, index) => {
   });
 });
 
+function showComputerPreview(frameSrc) {
+  if (!computerFrame) return;
+
+  isComputerPreviewActive = true;
+  computerFrame.src = frameSrc;
+}
+
+function restoreComputerFrame() {
+  if (!computerFrame) return;
+
+  isComputerPreviewActive = false;
+  computerFrame.src = computerFrames[computerFrameIndex];
+}
+
+projectComputerFrames.forEach(([fishClass, frameSrc]) => {
+  document.querySelectorAll(`.${fishClass}`).forEach((fish) => {
+    fish.addEventListener("mouseenter", () => showComputerPreview(frameSrc));
+    fish.addEventListener("focus", () => showComputerPreview(frameSrc));
+    fish.addEventListener("mouseleave", restoreComputerFrame);
+    fish.addEventListener("blur", restoreComputerFrame);
+  });
+});
+
 setupCopyEmailLinks();
 
 function scaleStage() {
@@ -146,7 +179,9 @@ document.addEventListener("keydown", (event) => {
 
 setInterval(() => {
   computerFrameIndex = (computerFrameIndex + 1) % computerFrames.length;
-  computerFrame.src = computerFrames[computerFrameIndex];
+  if (!isComputerPreviewActive) {
+    computerFrame.src = computerFrames[computerFrameIndex];
+  }
 }, 3800);
 
 function createScreenRipple() {

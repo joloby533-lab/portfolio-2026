@@ -24,14 +24,22 @@ body {
 
 .about-image {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  width: 100vw;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
   user-select: none;
   -webkit-user-drag: none;
+}
+
+@media (max-aspect-ratio: 16 / 9) {
+  .about-image {
+    width: auto;
+    height: 100vh;
+  }
 }
 
 .about-close {
