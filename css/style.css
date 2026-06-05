@@ -347,34 +347,29 @@ button {
   position: absolute;
   left: var(--ripple-x);
   top: var(--ripple-y);
-  width: 10px;
-  height: 10px;
-  border: 1.4px solid rgba(255, 255, 255, 0.68);
+  width: var(--ripple-size);
+  height: var(--ripple-size);
+  border: 1px solid rgba(255, 255, 255, var(--ripple-alpha));
   border-radius: 999px;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.15);
-  animation: screen-ripple-expand 3.1s ease-out forwards;
+  transform: translate(-50%, -50%) scale(0.92);
+  animation: screen-ripple-line 2.4s ease-out forwards;
 }
 
-.screen-ripple:nth-child(3n + 1) {
-  animation-delay: 0.16s;
-}
-
-.screen-ripple:nth-child(3n + 2) {
-  animation-delay: 0.32s;
-}
-
-@keyframes screen-ripple-expand {
+@keyframes screen-ripple-line {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.15);
+    transform: translate(-50%, -50%) scale(0.88);
   }
-  14% {
-    opacity: 0.62;
+  18% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.42;
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(8.4);
+    transform: translate(-50%, -50%) scale(1.06);
   }
 }
 

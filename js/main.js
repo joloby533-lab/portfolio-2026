@@ -189,20 +189,22 @@ function createScreenRipple() {
 
   const x = 12 + Math.random() * 76;
   const y = 14 + Math.random() * 72;
-  const ringCount = 2;
+  const ringSizes = [18, 34, 52, 72];
 
-  for (let index = 0; index < ringCount; index += 1) {
+  ringSizes.forEach((size, index) => {
     const ring = document.createElement("span");
     ring.className = "screen-ripple";
     ring.style.setProperty("--ripple-x", `${x}%`);
     ring.style.setProperty("--ripple-y", `${y}%`);
-    ring.style.animationDelay = `${index * 0.24}s`;
+    ring.style.setProperty("--ripple-size", `${size}px`);
+    ring.style.setProperty("--ripple-alpha", `${0.72 - index * 0.1}`);
+    ring.style.animationDelay = `${index * 0.12}s`;
     rippleLayer.append(ring);
 
     ring.addEventListener("animationend", () => {
       ring.remove();
     });
-  }
+  });
 }
 
 function scheduleScreenRipple() {
