@@ -250,6 +250,13 @@ body.is-works-scrolled .works-site-title {
   pointer-events: auto;
 }
 
+.works-about-button:hover,
+.works-about-button:focus-visible {
+  background: #1e1e1e;
+  color: #ffffff;
+  outline: none;
+}
+
 .works-home-fixed {
   position: fixed;
   right: 38px;
