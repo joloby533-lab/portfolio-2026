@@ -302,12 +302,19 @@ button {
   left: 362px;
   top: 70px;
   z-index: 10;
+  display: block;
   width: 1004px;
   height: 832px;
   background-image: url("../assets/computer-frame-nowater.svg");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 1004px auto;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.computer:focus-visible {
+  outline: none;
 }
 
 .computer-frame {
