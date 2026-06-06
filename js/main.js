@@ -1,9 +1,11 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const menuPanel = document.querySelector(".menu-panel");
 const stage = document.querySelector(".stage");
+const computerLink = document.querySelector(".computer-hit-area");
 const computerFrame = document.querySelector(".computer-frame");
 const rippleLayer = document.querySelector(".screen-ripple-layer");
 const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
+const worksComputerFrame = "assets/computer-frame-project-works.svg";
 const projectComputerFrames = Array.from({ length: 10 }, (_, index) => {
   const projectNumber = String(index + 1).padStart(2, "0");
   return [`fish-${projectNumber}`, `assets/computer-frame-project${projectNumber}.svg`];
@@ -34,7 +36,7 @@ function preloadComputerFrame(frameSrc) {
   return frameImage;
 }
 
-[...computerFrames, ...projectComputerFrames.map(([, frameSrc]) => frameSrc)].forEach(preloadComputerFrame);
+[worksComputerFrame, ...computerFrames, ...projectComputerFrames.map(([, frameSrc]) => frameSrc)].forEach(preloadComputerFrame);
 
 function parseCssTimeToMs(value) {
   const text = String(value || "").trim();
@@ -239,6 +241,11 @@ projectComputerFrames.forEach(([fishClass, frameSrc]) => {
     fish.addEventListener("blur", restoreComputerFrame);
   });
 });
+
+computerLink?.addEventListener("mouseenter", () => showComputerPreview(worksComputerFrame));
+computerLink?.addEventListener("focus", () => showComputerPreview(worksComputerFrame));
+computerLink?.addEventListener("mouseleave", restoreComputerFrame);
+computerLink?.addEventListener("blur", restoreComputerFrame);
 
 setupCopyEmailLinks();
 

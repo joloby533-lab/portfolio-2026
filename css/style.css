@@ -309,12 +309,6 @@ button {
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 1004px auto;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.computer:focus-visible {
-  outline: none;
 }
 
 .computer-frame {
@@ -325,6 +319,22 @@ button {
   width: 1004px;
   height: auto;
   pointer-events: none;
+}
+
+.computer-hit-area {
+  position: absolute;
+  left: 34.89%;
+  top: 17.69%;
+  z-index: 8;
+  display: block;
+  width: 30.52%;
+  height: 27.98%;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.computer-hit-area:focus-visible {
+  outline: none;
 }
 
 .screen-ripple-layer {
