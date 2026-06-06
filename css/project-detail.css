@@ -327,6 +327,51 @@ button {
   pointer-events: none;
 }
 
+.works-detail-scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 7.1%;
+  z-index: 3;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 8px 22px rgba(30, 30, 30, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 0.24s ease;
+}
+
+.works-detail-scroll-hint::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 13px;
+  width: 18px;
+  height: 18px;
+  border-right: 3.2px solid rgba(150, 147, 100, 0.92);
+  border-bottom: 3.2px solid rgba(150, 147, 100, 0.92);
+  transform: rotate(45deg);
+}
+
+.works-detail-scroll-hint.is-visible {
+  opacity: 0.98;
+  animation: detail-scroll-hint-pulse 1.45s ease-in-out infinite;
+}
+
+@keyframes detail-scroll-hint-pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -2px);
+  }
+  50% {
+    transform: translate(-50%, 5px);
+  }
+}
+
 .works-detail-nav {
   position: absolute;
   top: 456.5px;

@@ -5,6 +5,7 @@ const detailScroller = document.querySelector(".works-detail-scroll-area");
 const previousButton = document.querySelector(".works-detail-nav-left");
 const nextButton = document.querySelector(".works-detail-nav-right");
 const detailStage = document.querySelector(".works-detail-stage");
+const detailFrameWrap = document.querySelector(".works-detail-frame-wrap");
 const projectDetailPage = document.querySelector(".project-detail-page");
 const closeButton = document.querySelector(".works-detail-close");
 const DESIGN_WIDTH = 1728;
@@ -83,6 +84,7 @@ const detailImages = configuredImages.length > 0 ? configuredImages : defaultDet
 let currentImageIndex = 0;
 let adjacentPreloaders = [];
 let progressDots = [];
+let scrollHint;
 const copyToastTimers = new WeakMap();
 
 function copyTextFallback(text) {
@@ -158,7 +160,31 @@ function showProjectImage(nextIndex) {
   detailImage.alt = detailImages[currentImageIndex].alt;
   detailScroller.scrollTop = 0;
   updateProgressIndicators();
+  updateScrollHint();
+  requestAnimationFrame(updateScrollHint);
   preloadAdjacentImages();
+}
+
+function setupScrollHint() {
+  if (!detailFrameWrap || !detailScroller) return;
+
+  scrollHint = document.createElement("span");
+  scrollHint.className = "works-detail-scroll-hint";
+  scrollHint.setAttribute("aria-hidden", "true");
+  detailFrameWrap.append(scrollHint);
+
+  detailScroller.addEventListener("scroll", updateScrollHint, { passive: true });
+  detailImage?.addEventListener("load", updateScrollHint);
+  window.addEventListener("resize", updateScrollHint);
+  requestAnimationFrame(updateScrollHint);
+}
+
+function updateScrollHint() {
+  if (!scrollHint || !detailScroller) return;
+
+  const canScrollDown = detailScroller.scrollHeight - detailScroller.clientHeight > 8;
+  const nearTop = detailScroller.scrollTop < 18;
+  scrollHint.classList.toggle("is-visible", canScrollDown && nearTop);
 }
 
 function setupProgressIndicators() {
@@ -200,6 +226,7 @@ function preloadAdjacentImages() {
 }
 
 setupCopyEmailLinks();
+setupScrollHint();
 setupProgressIndicators();
 
 if (menuToggle && menuPanel) {
