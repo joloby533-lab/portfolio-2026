@@ -3,6 +3,7 @@ const worksPage = document.querySelector(".works-page");
 const WORKS_DESIGN_HEIGHT = 2027;
 const copyToastTimers = new WeakMap();
 const comingSoonTimers = new WeakMap();
+let worksScrollHint;
 
 function copyTextFallback(text) {
   const textarea = document.createElement("textarea");
@@ -84,10 +85,31 @@ function setWorksPageHeight() {
 
 function updateWorksScrolledState() {
   document.body.classList.toggle("is-works-scrolled", window.scrollY > 24);
+  updateWorksScrollHint();
+}
+
+function setupWorksScrollHint() {
+  if (!worksPage) return;
+
+  worksScrollHint = document.createElement("span");
+  worksScrollHint.className = "works-scroll-hint";
+  worksScrollHint.setAttribute("aria-hidden", "true");
+  worksPage.append(worksScrollHint);
+  updateWorksScrollHint();
+}
+
+function updateWorksScrollHint() {
+  if (!worksScrollHint) return;
+
+  const canScrollDown = document.documentElement.scrollHeight - window.innerHeight > 8;
+  const nearTop = window.scrollY < 28;
+  worksScrollHint.classList.toggle("is-visible", canScrollDown && nearTop);
 }
 
 setupComingSoonCards();
 setupCopyEmailLinks();
 setWorksPageHeight();
+setupWorksScrollHint();
 updateWorksScrolledState();
 window.addEventListener("scroll", updateWorksScrolledState, { passive: true });
+window.addEventListener("resize", updateWorksScrollHint);
