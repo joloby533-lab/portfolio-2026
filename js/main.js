@@ -1,10 +1,16 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const menuPanel = document.querySelector(".menu-panel");
 const stage = document.querySelector(".stage");
+const computer = document.querySelector(".computer");
 const computerLink = document.querySelector(".computer-hit-area");
 const computerFrame = document.querySelector(".computer-frame");
-const rippleLayer = document.querySelector(".screen-ripple-layer");
-const computerFrames = ["assets/computer-frame-nowater.svg", "assets/computer-frame-nowater2.svg"];
+const computerFrames = [
+  "assets/computer-frame-now1.svg",
+  "assets/computer-frame-now2.svg",
+  "assets/computer-frame-now3.svg",
+  "assets/computer-frame-now4.svg",
+  "assets/computer-frame-now5.svg",
+];
 const worksComputerFrame = "assets/computer-frame-project-works.svg";
 const projectComputerFrames = Array.from({ length: 10 }, (_, index) => {
   const projectNumber = String(index + 1).padStart(2, "0");
@@ -16,8 +22,9 @@ const MIN_STAGE_SCALE = 0.66;
 const FISH_SWIM_STATE_KEY = "hao-portfolio-fish-swim-state";
 const pageAnimationStartedAt = performance.now();
 let computerFrameIndex = 0;
+let computerFrameDirection = 1;
 let isComputerPreviewActive = false;
-let rippleTimer;
+let computerFrameTimer;
 const copyToastTimers = new WeakMap();
 const computerFrameCache = new Map();
 
@@ -222,6 +229,7 @@ function showComputerPreview(frameSrc) {
   if (!computerFrame) return;
 
   isComputerPreviewActive = true;
+  computer?.classList.add("is-previewing");
   computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
 }
 
@@ -229,6 +237,7 @@ function restoreComputerFrame() {
   if (!computerFrame) return;
 
   isComputerPreviewActive = false;
+  computer?.classList.remove("is-previewing");
   const frameSrc = computerFrames[computerFrameIndex];
   computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
 }
@@ -307,54 +316,32 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-setInterval(() => {
-  computerFrameIndex = (computerFrameIndex + 1) % computerFrames.length;
-  if (!isComputerPreviewActive) {
-    const frameSrc = computerFrames[computerFrameIndex];
-    computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
-  }
-}, 3800);
+function scheduleComputerFrameLoop() {
+  if (computerFrames.length <= 1) return;
 
-function createScreenRipple() {
-  if (!rippleLayer || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  computerFrameTimer = window.setTimeout(() => {
+    if (computerFrameIndex === computerFrames.length - 1) {
+      computerFrameDirection = -1;
+    } else if (computerFrameIndex === 0) {
+      computerFrameDirection = 1;
+    }
 
-  const x = 12 + Math.random() * 76;
-  const y = 14 + Math.random() * 72;
-  const ringSizes = [18, 34, 52, 72];
+    computerFrameIndex += computerFrameDirection;
 
-  ringSizes.forEach((size, index) => {
-    const ring = document.createElement("span");
-    ring.className = "screen-ripple";
-    ring.style.setProperty("--ripple-x", `${x}%`);
-    ring.style.setProperty("--ripple-y", `${y}%`);
-    ring.style.setProperty("--ripple-size", `${size}px`);
-    ring.style.setProperty("--ripple-alpha", `${0.72 - index * 0.1}`);
-    ring.style.animationDelay = `${index * 0.12}s`;
-    rippleLayer.append(ring);
+    if (!isComputerPreviewActive) {
+      const frameSrc = computerFrames[computerFrameIndex];
+      computerFrame.src = computerFrameCache.get(frameSrc)?.src || frameSrc;
+    }
 
-    ring.addEventListener("animationend", () => {
-      ring.remove();
-    });
-  });
+    scheduleComputerFrameLoop();
+  }, 220);
 }
 
-function scheduleScreenRipple() {
-  const nextDelay = 700 + Math.random() * 1300;
-
-  rippleTimer = window.setTimeout(() => {
-    createScreenRipple();
-    scheduleScreenRipple();
-  }, nextDelay);
-}
-
-createScreenRipple();
-window.setTimeout(createScreenRipple, 420);
-window.setTimeout(createScreenRipple, 980);
-scheduleScreenRipple();
+scheduleComputerFrameLoop();
 
 window.addEventListener("pagehide", () => {
   saveFishSwimProgress();
-  window.clearTimeout(rippleTimer);
+  window.clearTimeout(computerFrameTimer);
 });
 
 document.addEventListener("visibilitychange", () => {
